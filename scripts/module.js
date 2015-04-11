@@ -1,17 +1,17 @@
 angular.module('praxismarket', ['ngMaterial'])
     .factory('dataService', function () {
-        var streamData = {};
+        //var streamData = {};
         var dialog;
         return {
-            getStreamData: function () {
-                return streamData;
-            },
-            setStreamData: function (newStreamData) {
-                streamData = newStreamData;
-            },
-            resetStreamData: function () {
-                streamData = {};
-            },
+            //getStreamData: function () {
+            //    return streamData;
+            //},
+            //setStreamData: function (newStreamData) {
+            //    streamData = newStreamData;
+            //},
+            //resetStreamData: function () {
+            //    streamData = {};
+            //},
             getDialog: function () {
                 return dialog;
             },
@@ -26,6 +26,11 @@ angular.module('praxismarket', ['ngMaterial'])
         // ==============================
         $scope.appName = "Praxis Market";
 
+        var offerCallback = function (offers) {
+            //dataService.setStreamData(offers);
+            $scope.joboffers = offers;
+            $scope.$apply();
+        }
         // ==============================
         // ===== Side Nav
         // ==============================
@@ -50,61 +55,64 @@ angular.module('praxismarket', ['ngMaterial'])
                     $log.debug("close LEFT is done");
                 });
         };
-        $scope.typeSelected = function(offer) {
+        $scope.typeSelected = function (offer) {
             $scope.selectedType = offer.shortname;
             console.log("selected: " + offer.shortname);
             if ($mdMedia('gt-md')) {
                 // request for desktop
-                var offers = communicator.getOffersByType(offer.shortname);
+                communicator.getOffersByType(offer.shortname, undefined, offerCallback);
                 $scope.moreOffersAvailable = false;
             } else {
                 // request on mobile
-                var offers = communicator.getOffersByType(offer.shortname, 10);
+                communicator.getOffersByType(offer.shortname, 10, offerCallback);
                 $scope.moreOffersAvailable = true;
             }
 
-            dataService.setStreamData(offers);
+            //dataService.setStreamData(offers);
         };
 
-        $scope.offerTypes = communicator.getAllOfferTypes();
+        communicator.getAllOfferTypes(function (offers) {
+            $scope.offerTypes = offers;
+            $scope.$apply();
+        });
 
         // ==============================
         // ===== Cards
         // ==============================
-        $scope.$watch(function (scope) {
-            return dataService.getStreamData();
-        }, function (newVal, oldVal, scope) {
-            if (newVal !== oldVal) {
-                scope.joboffers = newVal;
-            }
-        }, true);
+        //$scope.$watch(function (scope) {
+        //    return dataService.getStreamData();
+        //}, function (newVal, oldVal, scope) {
+        //    if (newVal !== oldVal) {
+        //        scope.joboffers = newVal;
+        //    }
+        //}, true);
 
-        $scope.loadMoreOffers = function() {
+        $scope.loadMoreOffers = function () {
             var currentCardCount = $window.document.getElementsByClassName("card").length;
             var moreOffers = communicator.getMoreOffersByType($scope.selectedType, currentCardCount);
-            dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
+            //dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
         }
 
-        var offers =  [
+        var offers = [
             {
-                'company': 'Pharmakon Software GmbH',
+                'company': {'companyName': 'Pharmakon Software GmbH'},
                 'title': 'Werkstudent (m/w) - Kampagnen-Management / KA-DG141105',
-                'location': 'Karlsruhe',
+                'usageSite': 'Karlsruhe',
                 'description': 'Du arbeitest gern eng mit Gründern zusammen, lernst das operative Geschäft eines Startups kennen und bist bei der Entwicklung von neuen Ideen hautnah dabei? Dann ist dieses Praktikum genau richtig für dich. Was Dich erwartet # Du bekommst Einblicke in Bereiche wie Produktentwicklung, Algorithmen, Marketing und Finanzierung # Du betreust eigenständig Projekte und setzt eigene Ideen um # Du profitierst während und nach dem Praktikum vom Netzwerk der Gründer, die dir als Mentoren für die Umsetzung eigener Geschäftsideen zur Verfügung stehen # Du übernimmst Verantwortung und arbeitest selbständig, wofür dir ein moderner Arbeitsplatz zur Verfügung steht Was Du mitbringen solltest # Du hast Interesse an Unternehmertum oder spielst mit dem Gedanken später selbst zu gründen # Du glaubst auch, dass es an der Zeit ist Spam-Werbung durch interessante Newsletter zu ersetzen # Du bist offen und arbeitest gerne mit Menschen # Du lernst dich schnell in neue Sachverhalte ein und scheust nicht davor zurück tatkräftig in einem Team mitzuarbeiten # Du bringst 3 bis 6 Monate Zeit mit und sprichst fließend Deutsch oder Englisch',
                 'firstname': 'Susanne',
                 'lastname': 'Sonne'
             },
             {
-                'company': 'PROCAD GmbH & Co. KG',
+                'company': {'companyName': 'PROCAD GmbH & Co. KG'},
                 'title': 'Bachelor- oder Master- Abschlussarbeit - Evaluation von Systemen zur Speicherung und Realtime-Analyse großer Datenmengen',
-                'location': 'Berlin',
+                'usageSite': 'Berlin',
                 'description': 'Du bist kommunikativ und arbeitest gerne mit Menschen, dich stören schlechte Newsletter, wie sie heute leider üblich sind, du trägst lieber Verantwortung als dich im Konzern zu verstecken? Dann ist dieses Praktikum genau richtig für dich. Was Dich erwartet. # Ein ehrgeiziges, begeistertes Team # Ein innovatives Produkt "on the edge of technology" # Du lernst vom ersten Tag, wie man Marketing und Vertrieb in einem jungen IT-Unternehmen aufbaut # Du betreust eigenständig Projekte und setzt eigene Ideen um # Du übernimmst Verantwortung und arbeitest selbständig, wofür dir ein moderner ärbeitsplatz zur Verfügung steht Was Du mitbringen solltest # Lust in einem au strebenden Startup zu arbeiten # Freude an der Kommunkation mit Menschen # Laufendes Studium an einer Hochschule oder Universität # Begeisterung und selbständiges arbeiten Weitere Details siehe PDF-Ausschreibung.',
                 'firstname': 'Lisa',
                 'lastname': 'Göpferich'
             }
         ];
         $scope.joboffers = offers;
-        dataService.setStreamData(offers);
+        //dataService.setStreamData(offers);
 
         $scope.showCompanyDetails = function (ev, companyId) {
             ev.stopPropagation();
