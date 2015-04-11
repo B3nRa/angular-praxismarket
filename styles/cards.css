@@ -1,3 +1,15 @@
 .card {
     min-height: 150px;
 }
+.material-avatar {
+    vertical-align:middle;
+    width: 20px;
+    height: 20px;
+    margin-right: 16px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    padding:6px;
+    background-color: rgba(240, 240, 240, 0.21);
+    border: 2px solid #FFF;
+    box-shadow: 0 0 1px #888;
+}
