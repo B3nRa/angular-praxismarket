@@ -54,6 +54,7 @@ angular.module('praxismarket', ['ngMaterial'])
                 // request on mobile
                 var offers = communicator.getOffersByType(offer.shortname, 10);
                 $scope.moreOffersAvailable = true;
+                $scope.close();
             }
 
             dataService.setStreamData(offers);
