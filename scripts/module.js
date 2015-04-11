@@ -20,7 +20,7 @@ angular.module('praxismarket', ['ngMaterial'])
             }
         };
     })
-    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia) {
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog) {
         // ==============================
         // ===== General
         // ==============================
