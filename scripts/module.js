@@ -1,6 +1,14 @@
 angular.module('praxismarket', ['ngMaterial'])
     .controller('MainController', function ($scope) {
         $scope.appName = "Praxis Market";
+
+        $scope.closeDialog = function () {
+            // Easily hides most recent dialog shown...
+            // no specific instance reference is needed.
+            if ($scope.dialog) {
+                $scope.dialog.hide();
+            }
+        }
     })
     .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
         $scope.toggleLeft = function () {
@@ -18,13 +26,34 @@ angular.module('praxismarket', ['ngMaterial'])
             angular.element(document.getElementById('search-icon')).removeClass("focus");
         }
     })
-    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log, $http) {
         $scope.close = function () {
             $mdSidenav('left').close()
                 .then(function () {
                     $log.debug("close LEFT is done");
                 });
         };
+
+        //$http.defaults.headers.common.Authorization = "Basic cmFiZTEwMTI6RnJpZWRyaWNoOTI=";
+        //$http.defaults.headers.common.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+        //$http.get('https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/offertypes/all',
+        //    {headers: {Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'}})
+        //    .then(function (response) {
+        //        console.log("§hio");
+        //        window.foo2 = response;
+        //    });
+        //var xhr = new XMLHttpRequest();
+        //xhr.open('GET', 'https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/offertypes/all', false);
+        //xhr.setRequestHeader('Authorization', 'Basic cmFiZTEwMTI6RnJpZWRyaWNoOTI=');
+        ////xhr.setrequestheader('Access-Control-Request-Headers', 'Authorization');
+        ////xhr.setrequestheader('X-Testing', 'testing');
+        //xhr.send(null);
+
+        //if(xhr.status === 401){
+        //    xhr.
+        //}
+        //console.log(xhr.responseText);
+
     })
     .controller('cardController', function ($scope, $mdDialog) {
         $scope.joboffers = [
@@ -49,23 +78,21 @@ angular.module('praxismarket', ['ngMaterial'])
         $scope.showCompanyDetails = function (ev, companyId) {
             var companies = [{
                 'name': 'FOOBAR COMPANY',
-                'description': 'Lorem Ipsum',
+                'description': 'Lorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
                 'website': 'http://drop.social',
-                'street': 'Philippstr.',
+                'street': 'Philippstr. 3',
                 'city': 'Karlsruhe',
+                'zipcode': '12345',
                 'numberOfEmployees': '9',
-                'country': 'Germany'
+                'country': 'Germany',
+                'contact': {
+                    'firstName': 'Clark',
+                    'secondName': 'Gable',
+                    'phone': '+49 12345',
+                    'mail': 'foo@bar.com'
+                }
             }];
             var company = companies[companyId];
-            $scope.companyDetails = {
-                'name': company.name,
-                'description': company.description,
-                'website': company.website,
-                'street': company.street,
-                'city': company.city,
-                'numberOfEmployees': company.numberOfEmployees,
-                'country': company.country
-            }
 
             $mdDialog.show({
                 controller: DialogController,
@@ -84,18 +111,6 @@ angular.module('praxismarket', ['ngMaterial'])
                 });
         }
 
-        $scope.showAdvanced = function (ev) {
-            $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'companyDetails.template.html',
-                targetEvent: ev
-            })
-                .then(function (answer) {
-                    $scope.alert = 'You said the information was "' + answer + '".';
-                }, function () {
-                    $scope.alert = 'You cancelled the dialog.';
-                });
-        };
 
         function DialogController($scope, $mdDialog, company) {
             $scope.company = company;
@@ -109,10 +124,18 @@ angular.module('praxismarket', ['ngMaterial'])
             $scope.answer = function (answer) {
                 $mdDialog.hide(answer);
             };
+            $scope.closeDialog = function () {
+                $mdDialog.hide();
+            }
         }
     })
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('indigo')
             .accentPalette('orange');
+    })
+    .run(function ($http) {
+        $http.defaults.headers.common.Authorization = "Basic cmFiZTEwMTI6RnJpZWRyaWNoOTI=";
+        $http.defaults.headers.common.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
     });
+;

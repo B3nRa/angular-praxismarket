@@ -15,12 +15,10 @@
     vertical-align: middle;
 }
 
-
 .card-header-avatar {
     display: inline-block;
-    float:left;
+    float: left;
 }
-
 
 .card-header-info {
     display: inline-block;
@@ -34,8 +32,8 @@
     text-overflow: ellipsis;
     overflow: hidden;
     color: #575757;
-    float:left;
-    clear:both;
+    float: left;
+    clear: both;
 }
 
 .card-location {
@@ -47,11 +45,12 @@
     color: #FEA737;
     font-size: 16px;
     font-weight: 400;
+}
 
+path:hover {
+    fill: red;
 }
-path:hover{
-    fill:red;
-}
+
 .card-body {
     /*margin-top: 1rem;*/
     margin-bottom: 1rem;
@@ -124,42 +123,74 @@ path:hover{
 }
 
 .dialog-company-header {
+    font-size: 18px;
+    font-weight: 600;
+    color: #575757;
     margin-bottom: 2rem;
 }
 
-.dialog-company-header-basic {
-    display: inline-block;
-    margin-right: 2rem;
+.dialog-company-website {
+    font-weight: 400;
+    font-size: 13px;
+    margin-bottom: 1.5rem;
 }
 
-.dialog-company-header-numbers {
-    display: inline-block;
-    vertical-align: top;
+.dialog-company-info-prefix {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.dialog-company-location, .dialog-company-numbers, .dialog-company-contact-info {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.dialog-company-additional-info {
+    margin-bottom: 1rem;
+}
+
+.separator {
+    margin-left: 1rem;
     margin-right: 1rem;
 }
 
-.dialog-container-company{
+/*.dialog-company-header-numbers {*/
+/*display: inline-block;*/
+/*vertical-align: top;*/
+/*margin-right: 1rem;*/
+/*}*/
+
+.dialog-container-company {
     width: 30%;
 }
 
+.dialog-company-map {
+    width: 100%;
+    height: 100%;
+}
+
+.mailto-link {
+    text-decoration: none;
+}
+
 /*.dialogdemoBasicUsage .dialogDemo1 {*/
-    /*height: 500px; }*/
+/*height: 500px; }*/
 /*.dialogdemoBasicUsage .full {*/
-    /*width: 100%;*/
-    /*height: 100%; }*/
+/*width: 100%;*/
+/*height: 100%; }*/
 /*.dialogdemoBasicUsage .gap {*/
-    /*width: 50px; }*/
+/*width: 50px; }*/
 /*.dialogdemoBasicUsage md-dialog md-content.sticky-container {*/
-    /*padding: 0; }*/
+/*padding: 0; }*/
 /*.dialogdemoBasicUsage md-dialog md-content.sticky-container .dialog-content {*/
-    /*padding: 0 24px 24px; }*/
+/*padding: 0 24px 24px; }*/
 /*.dialogdemoBasicUsage .md-subheader {*/
-    /*background-color: #dcedc8;*/
-    /*margin: 0; }*/
+/*background-color: #dcedc8;*/
+/*margin: 0; }*/
 /*.dialogdemoBasicUsage h2.md-subheader.md-sticky-clone {*/
-    /*margin-right: 0;*/
-    /*margin-top: 0;*/
-    /*box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.16); }*/
+/*margin-right: 0;*/
+/*margin-top: 0;*/
+/*box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.16); }*/
 /*.dialogdemoBasicUsage h2 .md-subheader-content {*/
-    /*padding-left: 10px; }*/
+/*padding-left: 10px; }*/
 
