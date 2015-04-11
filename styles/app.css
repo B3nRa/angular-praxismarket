@@ -2,45 +2,51 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,300italic,500,500italic,700,700italic);
 
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-	margin: 0;
-	padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
 }
 
 .toolbardemoBasicUsage md-toolbar md-icon.md-default-theme {
-	color: white; }
+    color: white;
+}
 
 .md-default-theme {
-	padding: 0;
+    padding: 0;
 }
 
 .menu-icon,
 .list-icon,
 .search-icon {
-	padding: 8px;
+    padding: 8px;
 }
 
 .input-container {
-	background-color: black;
+    background-color: black;
 }
 
 .search-input {
-	background-color: white;
-	width: 100%;
-	padding: 4px 4px 4px 40px;
+    background-color: white;
+    width: 100%;
+    padding: 4px 4px 4px 40px;
 }
-.search-button {
-	color: black !important;
-	float: left;
 
-	position: absolute;
-	top: 16px;
-	left: 24px;
+.search-button {
+    color: black !important;
+    float: left;
+
+    position: absolute;
+    top: 16px;
+    left: 24px;
+}
+
+.primary-color {
+    color: rgb(63, 81, 181);
 }
