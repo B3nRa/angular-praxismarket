@@ -120,7 +120,7 @@ angular.module('praxismarket', ['ngMaterial'])
                 }, function () {
                     $scope.alert = 'You cancelled the dialog.';
                 });
-        }
+        };
 
         $scope.showAdvanced = function (ev) {
             $mdDialog.show({

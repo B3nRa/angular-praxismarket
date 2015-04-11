@@ -2,6 +2,7 @@
     'use strict';
 
     var internal = {
+        serviceUrl: "http://praxis-market.appspot.com/apis?url=",
         getAllOfferTypes: function () {
             // TODO: icon is added manually -> build a switch statement for real implementation
             var allOfferTypes = [
