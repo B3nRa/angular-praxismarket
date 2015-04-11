@@ -1,16 +1,27 @@
 angular.module('praxismarket', ['ngMaterial'])
-    .controller('MainController', function ($scope) {
+    .factory('dataService', function () {
+        var streamData = {};
+        return {
+            getStreamData: function() {
+                return streamData;
+            },
+            setStreamData: function(newStreamData) {
+                streamData = newStreamData;
+            },
+            resetStreamData: function() {
+                streamData = {};
+            }
+        };
+    })
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia) {
+        // ==============================
+        // ===== General
+        // ==============================
         $scope.appName = "Praxis Market";
 
-        $scope.closeDialog = function () {
-            // Easily hides most recent dialog shown...
-            // no specific instance reference is needed.
-            if ($scope.dialog) {
-                $scope.dialog.hide();
-            }
-        }
-    })
-    .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+        // ==============================
+        // ===== Side Nav
+        // ==============================
         $scope.toggleLeft = function () {
             $mdSidenav('left').toggle()
                 .then(function () {
@@ -25,38 +36,40 @@ angular.module('praxismarket', ['ngMaterial'])
             console.log("unfocus");
             angular.element(document.getElementById('search-icon')).removeClass("focus");
         }
-    })
-    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log, $http) {
+
         $scope.close = function () {
             $mdSidenav('left').close()
                 .then(function () {
                     $log.debug("close LEFT is done");
                 });
         };
+        $scope.typeSelected = function(offer) {
+            console.log("selected: " + offer.shortname);
+            if($mdMedia('gt-md')) {
+                // request for desktop
+                var offers = communicator.getOffersByType(offer.shortname);
+            } else {
+                // request on mobile
+                var offers = communicator.getOffersByType(offer.shortname, 10);
+            }
 
-        //$http.defaults.headers.common.Authorization = "Basic cmFiZTEwMTI6RnJpZWRyaWNoOTI=";
-        //$http.defaults.headers.common.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-        //$http.get('https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/offertypes/all',
-        //    {headers: {Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'}})
-        //    .then(function (response) {
-        //        console.log("§hio");
-        //        window.foo2 = response;
-        //    });
-        //var xhr = new XMLHttpRequest();
-        //xhr.open('GET', 'https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/offertypes/all', false);
-        //xhr.setRequestHeader('Authorization', 'Basic cmFiZTEwMTI6RnJpZWRyaWNoOTI=');
-        ////xhr.setrequestheader('Access-Control-Request-Headers', 'Authorization');
-        ////xhr.setrequestheader('X-Testing', 'testing');
-        //xhr.send(null);
+            dataService.setStreamData(offers);
+        };
 
-        //if(xhr.status === 401){
-        //    xhr.
-        //}
-        //console.log(xhr.responseText);
+        $scope.offerTypes = communicator.getAllOfferTypes();
 
-    })
-    .controller('cardController', function ($scope, $mdDialog) {
-        $scope.joboffers = [
+        // ==============================
+        // ===== Cards
+        // ==============================
+        $scope.$watch(function(scope) {
+            return dataService.getStreamData();
+        }, function(newVal, oldVal, scope) {
+            if(newVal !== oldVal) {
+                scope.joboffers = newVal;
+            }
+        }, true);
+
+        var offers =  [
             {
                 'company': 'Pharmakon Software GmbH',
                 'title': 'Werkstudent (m/w) - Kampagnen-Management / KA-DG141105',
@@ -74,6 +87,8 @@ angular.module('praxismarket', ['ngMaterial'])
                 'lastname': 'Göpferich'
             }
         ];
+        $scope.joboffers = offers;
+        dataService.setStreamData(offers);
 
         $scope.showCompanyDetails = function (ev, companyId) {
             var companies = [{
@@ -109,7 +124,7 @@ angular.module('praxismarket', ['ngMaterial'])
                 }, function () {
                     $scope.alert = 'You cancelled the dialog.';
                 });
-        }
+        };
 
 
         function DialogController($scope, $mdDialog, company) {

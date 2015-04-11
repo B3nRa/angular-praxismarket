@@ -6,6 +6,8 @@
 
     <meta charset="UTF-8">
 
+    <script src="scripts/communicator.js"></script>
+
 	<!-- Angulars Material CSS now available via Google CDN; version 0.8 used here -->
 	<link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
 
@@ -24,47 +26,30 @@
 
 </head>
 <body ng-controller="MainController" ng-click="closeDialog()">
-<div ng-controller="AppCtrl" layout="column" style="height: 100%">
+<div layout="column" style="height: 100%">
     <section layout="row" flex>
+
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
                     md-is-locked-open="$mdMedia('gt-md')">
             <md-toolbar class="md-theme-indigo">
                 <h1 class="md-toolbar-tools">{{ appName }}</h1>
             </md-toolbar>
-            <md-content layout-padding ng-controller="LeftCtrl">
-                <md-list>
-                    <md-list-item class="md-2-line">
-                        <i class="fa fa-book nav-icon"></i>
+            <md-content layout-padding >
+                <md-list ng-repeat="offer in offerTypes">
+                    <md-list-item class="md-2-line" ng-click="typeSelected(offer)">
+                        <i class="fa {{ offer.icon }} nav-icon"></i>
                         <div class="md-list-item-text">
-                            <h3>Foo List Item 1</h3>
-                            <p>asdasdasd</p>
-                        </div>
-                    </md-list-item>
-                    <md-list-item class="md-2-line">
-                        <i class="fa fa-book nav-icon"></i>
-                        <div class="md-list-item-text">
-                            <h3>Foo List Item 2</h3>
-                            <p>asdasdasd</p>
-                        </div>
-                    </md-list-item>
-                    <md-list-item class="md-2-line">
-                        <i class="fa fa-book nav-icon"></i>
-                        <div class="md-list-item-text">
-                            <h3>Foo List Item 3</h3>
-                            <p>asdasdasd</p>
-                        </div>
-                    </md-list-item>
-                    <md-list-item class="md-2-line">
-                        <i class="fa fa-book nav-icon"></i>
-                        <div class="md-list-item-text">
-                            <h3>Foo List Item 4</h3>
-                            <p>asdasdasd</p>
+                            <h3>{{ offer.name }}</h3>
+                            <p>{{ offer.shortname }}</p>
                         </div>
                     </md-list-item>
                 </md-list>
             </md-content>
         </md-sidenav>
+
+
         <md-content flex layout-padding>
+
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()" hide-gt-md >
@@ -78,7 +63,7 @@
                     <div class="input-container">
                         <input type="text" placeholder="Search" class="search-input"
                                ng-focus="focus()" ng-blur="blur()">
-                            <i class="fa fa-search search-icon" id="search-icon"></i>
+                        <i class="fa fa-search search-icon" id="search-icon"></i>
                     </div>
 
                     <!--<span flex></span>-->
@@ -87,7 +72,6 @@
                     </md-button>
                 </div>
             </md-toolbar>
-
 
             <!--<div layout="column" layout-fill layout-align="top center">-->
             <!--<p>-->
@@ -106,7 +90,7 @@
             <!--</div>-->
             <!--</div>-->
 
-            <div ng-controller="cardController">
+            <div class="card-container-wrapper">
                 <md-content>
                     <div class="card-container">
                         <md-card class="card" ng-repeat="j in joboffers">
@@ -142,6 +126,7 @@
                             </md-card-content>
                         </md-card>
                     </div>
+                    <md-button class="more-button" ng-show="" >More...</md-button>
                 </md-content>
             </div>
         </md-content>
