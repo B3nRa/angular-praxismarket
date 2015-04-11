@@ -123,16 +123,34 @@ path:hover {
 }
 
 .dialog-company-header {
-    font-size: 18px;
-    font-weight: 600;
+    position: relative;
+    vertical-align: middle;
+}
+
+.dialog-company-header-avatar {
+    display: inline-block;
+    float: left;
+}
+
+.dialog-company-header-info {
+    display: inline-block;
+    margin-top: 1px;
+}
+
+.dialog-company-name {
+    font-size: 15px;
+    font-weight: 500;
     color: #575757;
-    margin-bottom: 2rem;
+    float: left;
+    clear: both;
 }
 
 .dialog-company-website {
     font-weight: 400;
     font-size: 13px;
     margin-bottom: 1.5rem;
+    float: left;
+    clear: both;
 }
 
 .dialog-company-info-prefix {
@@ -147,6 +165,10 @@ path:hover {
 
 .dialog-company-additional-info {
     margin-bottom: 1rem;
+}
+
+.dialog-company-description {
+    margin: 0 0 2rem 1rem;
 }
 
 .separator {

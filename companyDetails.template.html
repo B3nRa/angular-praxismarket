@@ -9,15 +9,22 @@
 
                 <div class="dialog-company">
                     <div class="dialog-company-header">
-                        <div class="dialog-company-name">
-                            {{company.name}}
+                        <div class="dialog-company-name" class="dialog-company-header-avatar">
+                            <img src="https://plus.google.com/_/favicon?domain=www.facebook.com"
+                                 class="material-avatar">
                         </div>
-                        <div class="dialog-company-website">
-                            <a class="mailto-link" href="{{::company.website}}">{{::company.website}}</a>
+                        <div class="dialog-company-header-info">
+                            <span class="dialog-company-name">
+                                {{company.name}}
+                            </span>
+                            <span class="dialog-company-website">
+                                <a class="mailto-link" href="{{::company.website}}">{{::company.website}}</a>
+                            </span>
                         </div>
-                        <div class="dialog-company-additional-info">
-                            <div class="dialog-company-location">
-                                <span class="dialog-company-info-prefix">Address:</span>
+                    </div>
+                    <div class="dialog-company-additional-info">
+                        <div class="dialog-company-location">
+                            <span class="dialog-company-info-prefix">Address:</span>
                             <span>
                                 {{::company.street}},
                             </span>
@@ -30,37 +37,37 @@
                             <span>
                                 {{::company.country}}
                             </span>
-                            </div>
-                            <div class="dialog-company-numbers">
-                                <div>
-                                    <span class="dialog-company-info-prefix">Employees No.:</span>
-                                    {{::company.numberOfEmployees}}
-                                </div>
-                                <div>
-                                    <span class="dialog-company-info-prefix">Offers No.:</span>
-                                    {{::company.numberOfEmployees}}
-                                </div>
-                            </div>
                         </div>
-                        <div class="dialog-company-contact-info">
+                        <div class="dialog-company-numbers">
                             <div>
-                                <span class="dialog-company-info-prefix">Contact:</span> {{::company.contact.firstName}}
-                                {{::company.contact.secondName}}
+                                <span class="dialog-company-info-prefix">Employees No.:</span>
+                                {{::company.numberOfEmployees}}
                             </div>
                             <div>
-                                <span class="dialog-company-info-prefix">Phone:</span> {{::company.contact.phone}}
-                            </div>
-                            <div>
-                                <span class="dialog-company-info-prefix">Mail:</span> <a class="mailto-link"
-                                                                                         href="mailto:{{::company.contact.mail}}">{{::company.contact.mail}}</a>
+                                <span class="dialog-company-info-prefix">Offers No.:</span>
+                                {{::company.numberOfEmployees}}
                             </div>
                         </div>
                     </div>
-                    <div class="dialog-company-description">
-                        {{::company.description}}
+                    <div class="dialog-company-contact-info">
+                        <div>
+                            <span class="dialog-company-info-prefix">Contact:</span> {{::company.contact.firstName}}
+                            {{::company.contact.secondName}}
+                        </div>
+                        <div>
+                            <span class="dialog-company-info-prefix">Phone:</span> {{::company.contact.phone}}
+                        </div>
+                        <div>
+                            <span class="dialog-company-info-prefix">Mail:</span> <a class="mailto-link"
+                                                                                     href="mailto:{{::company.contact.mail}}">{{::company.contact.mail}}</a>
+                        </div>
                     </div>
                 </div>
+                <div class="dialog-company-description">
+                    {{::company.description}}
+                </div>
             </div>
-        </md-content>
-    </md-dialog>
+</div>
+</md-content>
+</md-dialog>
 </div>
