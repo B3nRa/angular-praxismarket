@@ -1,3 +1,57 @@
 .card {
     min-height: 150px;
+    width: 30rem;
+    margin: 2rem auto;
+}
+
+.card-header {
+    margin-bottom: 1.5rem;
+    position: relative;
+    font-size: 20px;
+}
+
+.card-header * {
+    vertical-align: middle;
+}
+
+.card-header-avatar {
+    display: inline-block;
+}
+
+.card-header-info {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+}
+
+.card-body {
+    /*margin-top: 1rem;*/
+    margin-bottom: 1rem;
+}
+
+.card-body-title {
+    margin-bottom: 0.5rem;
+    font-size: 24px;
+}
+
+.card-footer {
+    position: relative;
+}
+
+.card-footer-contact {
+    position: absolute;
+    right: 0px;
+}
+
+.card-footer-contact-info {
+    margin-left: 0.3rem;
+}
+
+.card-footer-contact-info a {
+    text-decoration: none;
+}
+
+.horizontal-separator {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
