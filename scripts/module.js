@@ -1,26 +1,32 @@
-angular.module('praxismarket', 
-['ngMaterial'])
-    .controller('MainController', function($scope) {
+angular.module('praxismarket', ['ngMaterial'])
+    .controller('MainController', function ($scope) {
         $scope.appName = "Praxis Market";
     })
-    .controller('AppCtrl', function($scope, $timeout, $mdSidenav, $log) {
-        $scope.toggleLeft = function() {
+    .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+        $scope.toggleLeft = function () {
             $mdSidenav('left').toggle()
-                .then(function(){
+                .then(function () {
                     $log.debug("toggle left is done");
                 });
         };
     })
-    .controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
-        $scope.close = function() {
+    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+        $scope.close = function () {
             $mdSidenav('left').close()
-                .then(function(){
+                .then(function () {
                     $log.debug("close LEFT is done");
                 });
         };
-.controller('cardController', function($scope){
+    }).
+    controller('cardController', function ($scope) {
         $scope.joboffers = [
-            {'company': 'Foo', 'title': 'Bar', 'location': 'Karlsruhe', 'firstname': 'Susanne', 'lastname': 'Sonne'},
+            {
+                'company': 'Foo',
+                'title': 'Bar',
+                'location': 'Karlsruhe',
+                'firstname': 'Susanne',
+                'lastname': 'Sonne'
+            },
             {'company': 'Blub', 'title': 'Hihi', 'location': 'Berlin', 'firstname': 'Susanne', 'lastname': 'Sonne'}
         ];
     });
