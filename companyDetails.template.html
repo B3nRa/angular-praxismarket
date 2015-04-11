@@ -1,53 +1,73 @@
-<div class="dialog-container-company">
+<div class="dialog-container-company" ng-click="stopPropagation($event)">
     <md-dialog aria-label="Company">
         <md-content class="sticky-container">
             <!--<md-subheader class="md-sticky-no-effect">{{company.name}}</md-subheader>-->
             <div class="dialog-content">
+                <a href="http://maps.google.com/?q=Philippstraße 9 Karlsruhe">
+                    <img class="dialog-company-map"
+                         src="https://maps.googleapis.com/maps/api/staticmap?size=454x160&markers=color:blue%7CPhilippstra%C3%9Fe%209%20Karlsruhe"></a>
+
                 <div class="dialog-company">
                     <div class="dialog-company-header">
-                        <div>
-                            {{company.name}}
+                        <div class="dialog-company-name" class="dialog-company-header-avatar">
+                            <img src="https://plus.google.com/_/favicon?domain=www.facebook.com"
+                                 class="material-avatar">
                         </div>
-                        <div class="dialog-company-header-basic">
-                            <div>
+                        <div class="dialog-company-header-info">
+                            <span class="dialog-company-name">
+                                {{company.name}}
+                            </span>
+                            <span class="dialog-company-website">
+                                <a class="mailto-link" href="{{::company.website}}">{{::company.website}}</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="dialog-company-additional-info">
+                        <div class="dialog-company-location">
+                            <span class="dialog-company-info-prefix">Address:</span>
+                            <span>
+                                {{::company.street}},
+                            </span>
+                            <span>
+                                {{::company.zipcode}}
+                            </span>
+                            <span>
+                                {{::company.city}},
+                            </span>
+                            <span>
                                 {{::company.country}}
-                            </div>
-                            <div>
-                                {{::company.city}}
-                            </div>
-                            <div>
-                                {{::company.street}}
-                            </div>
-                            <div>
-                                {{::company.website}}
-                            </div>
+                            </span>
                         </div>
-                        <div class="dialog-company-header-numbers">
+                        <div class="dialog-company-numbers">
                             <div>
-                                #employees: {{::company.numberOfEmployees}}
+                                <span class="dialog-company-info-prefix">Employees No.:</span>
+                                {{::company.numberOfEmployees}}
                             </div>
                             <div>
-                                #offers: {{::company.numberOfEmployees}}
+                                <span class="dialog-company-info-prefix">Offers No.:</span>
+                                {{::company.numberOfEmployees}}
                             </div>
                         </div>
                     </div>
-                    <div class="dialog-company-description">
-                        {{::company.description}}
+                    <div class="dialog-company-contact-info">
+                        <div>
+                            <span class="dialog-company-info-prefix">Contact:</span> {{::company.contact.firstName}}
+                            {{::company.contact.secondName}}
+                        </div>
+                        <div>
+                            <span class="dialog-company-info-prefix">Phone:</span> {{::company.contact.phone}}
+                        </div>
+                        <div>
+                            <span class="dialog-company-info-prefix">Mail:</span> <a class="mailto-link"
+                                                                                     href="mailto:{{::company.contact.mail}}">{{::company.contact.mail}}</a>
+                        </div>
                     </div>
                 </div>
+                <div class="dialog-company-description">
+                    {{::company.description}}
+                </div>
             </div>
-        </md-content>
-        <!--<div class="md-actions" layout="row">-->
-        <!--<md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" hide show-md>-->
-        <!--More on Wikipedia-->
-        <!--</md-button>-->
-        <!--<span flex></span>-->
-        <!--<md-button ng-click="answer('not useful')">-->
-        <!--Not Useful-->
-        <!--</md-button>-->
-        <!--<md-button ng-click="answer('useful')" class="md-primary">-->
-        <!--Useful-->
-        <!--</md-button>-->
-        <!--</div>-->
-    </md-dialog>
+</div>
+</md-content>
+</md-dialog>
 </div>

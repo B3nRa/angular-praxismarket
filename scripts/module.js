@@ -1,19 +1,26 @@
 angular.module('praxismarket', ['ngMaterial'])
     .factory('dataService', function () {
         var streamData = {};
+        var dialog;
         return {
-            getStreamData: function() {
+            getStreamData: function () {
                 return streamData;
             },
-            setStreamData: function(newStreamData) {
+            setStreamData: function (newStreamData) {
                 streamData = newStreamData;
             },
-            resetStreamData: function() {
+            resetStreamData: function () {
                 streamData = {};
+            },
+            getDialog: function () {
+                return dialog;
+            },
+            setDialog: function (newDialog) {
+                dialog = newDialog;
             }
         };
     })
-    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $window, $log) {
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog) {
         // ==============================
         // ===== General
         // ==============================
@@ -46,7 +53,7 @@ angular.module('praxismarket', ['ngMaterial'])
         $scope.typeSelected = function(offer) {
             $scope.selectedType = offer.shortname;
             console.log("selected: " + offer.shortname);
-            if($mdMedia('gt-md')) {
+            if ($mdMedia('gt-md')) {
                 // request for desktop
                 var offers = communicator.getOffersByType(offer.shortname);
                 $scope.moreOffersAvailable = false;
@@ -64,10 +71,10 @@ angular.module('praxismarket', ['ngMaterial'])
         // ==============================
         // ===== Cards
         // ==============================
-        $scope.$watch(function(scope) {
+        $scope.$watch(function (scope) {
             return dataService.getStreamData();
-        }, function(newVal, oldVal, scope) {
-            if(newVal !== oldVal) {
+        }, function (newVal, oldVal, scope) {
+            if (newVal !== oldVal) {
                 scope.joboffers = newVal;
             }
         }, true);
@@ -100,25 +107,24 @@ angular.module('praxismarket', ['ngMaterial'])
         dataService.setStreamData(offers);
 
         $scope.showCompanyDetails = function (ev, companyId) {
+            ev.stopPropagation();
             var companies = [{
                 'name': 'FOOBAR COMPANY',
-                'description': 'Lorem Ipsum',
+                'description': 'Lorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
                 'website': 'http://drop.social',
-                'street': 'Philippstr.',
+                'street': 'Philippstr. 3',
                 'city': 'Karlsruhe',
+                'zipcode': '12345',
                 'numberOfEmployees': '9',
-                'country': 'Germany'
+                'country': 'Germany',
+                'contact': {
+                    'firstName': 'Clark',
+                    'secondName': 'Gable',
+                    'phone': '+49 12345',
+                    'mail': 'foo@bar.com'
+                }
             }];
             var company = companies[companyId];
-            $scope.companyDetails = {
-                'name': company.name,
-                'description': company.description,
-                'website': company.website,
-                'street': company.street,
-                'city': company.city,
-                'numberOfEmployees': company.numberOfEmployees,
-                'country': company.country
-            }
 
             $mdDialog.show({
                 controller: DialogController,
@@ -137,31 +143,22 @@ angular.module('praxismarket', ['ngMaterial'])
                 });
         };
 
-        $scope.showAdvanced = function (ev) {
-            $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'companyDetails.template.html',
-                targetEvent: ev
-            })
-                .then(function (answer) {
-                    $scope.alert = 'You said the information was "' + answer + '".';
-                }, function () {
-                    $scope.alert = 'You cancelled the dialog.';
-                });
-        };
 
-        function DialogController($scope, $mdDialog, company) {
+        function DialogController($scope, $mdDialog, dataService, company) {
             $scope.company = company;
+            dataService.setDialog($mdDialog);
 
-            $scope.hide = function () {
-                $mdDialog.hide();
-            };
-            $scope.cancel = function () {
-                $mdDialog.cancel();
-            };
-            $scope.answer = function (answer) {
-                $mdDialog.hide(answer);
-            };
+            $scope.stopPropagation = function (event) {
+                event.stopPropagation();
+            }
+        }
+
+        $scope.closeDialog = function () {
+            var dialog = dataService.getDialog();
+            if (dialog) {
+                dataService.setDialog(undefined);
+                dialog.hide();
+            }
         }
     })
     .config(function ($mdThemingProvider) {
@@ -169,3 +166,4 @@ angular.module('praxismarket', ['ngMaterial'])
             .primaryPalette('indigo')
             .accentPalette('orange');
     });
+;
