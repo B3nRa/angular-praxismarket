@@ -14,8 +14,14 @@ angular.module('praxismarket', ['ngMaterial'])
         };
     })
     .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia) {
+        // ==============================
+        // ===== General
+        // ==============================
         $scope.appName = "Praxis Market";
 
+        // ==============================
+        // ===== Side Nav
+        // ==============================
         $scope.toggleLeft = function () {
             $mdSidenav('left').toggle()
                 .then(function () {
@@ -52,6 +58,9 @@ angular.module('praxismarket', ['ngMaterial'])
 
         $scope.offerTypes = communicator.getAllOfferTypes();
 
+        // ==============================
+        // ===== Cards
+        // ==============================
         $scope.$watch(function(scope) {
             return dataService.getStreamData();
         }, function(newVal, oldVal, scope) {
