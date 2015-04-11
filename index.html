@@ -1,69 +1,154 @@
+
 <!DOCTYPE html>
 <html ng-app="praxismarket">
 <head>
-	<title>Angular Starter Template</title>
+    <title>Angular Starter Template</title>
 
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-	<!-- Angulars Material CSS now available via Google CDN; version 0.8 used here -->
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+    <!-- Angulars Material CSS now available via Google CDN; version 0.8 used here -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
 
-	<!-- Angular Material Dependencies -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
-	
-	<!-- Angular Material Javascript now available via Google CDN; version 0.8 used here -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
+    <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
 
-	<!-- Add styles -->
-	<link rel="stylesheet" type="text/css" href="styles/app.css">
-	<link rel="stylesheet" type="text/css" href="styles/cards.css">
+    <!-- Angular Material Javascript now available via Google CDN; version 0.8 used here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
+
+    <!-- Add styles -->
+    <link rel="stylesheet" type="text/css" href="styles/app.css">
+    <link rel="stylesheet" type="text/css" href="styles/cards.css">
+    <link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
 </head>
-<body>
-	<div ng-controller="cardController">
-		<md-content>
-			<md-card class="card">
-				<md-card-content>
-					<div class="card-header">
-						<img src="http://www.mediamarkt.de/favicon.ico">
-					</div>
-					<p>card content</p>
-					<p>other element</p>
-				</md-card-content>
-			</md-card>
-		</md-content>
-	</div>
+<body ng-controller="MainController">
+<div ng-controller="AppCtrl" layout="column" style="height: 100%">
+    <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')">
+            <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">{{ appName }}</h1>
+            </md-toolbar>
+            <md-content layout-padding ng-controller="LeftCtrl">
+                <md-button ng-click="close()" class="md-primary" hide-gt-md>
+                    Close Sidenav Left
+                </md-button>
+            </md-content>
+        </md-sidenav>
+        <md-content flex layout-padding>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()" hide-gt-md>
+                        <!--<md-icon md-svg-icon="img/icons/menu.svg"></md-icon>-->
+                        <i class="fa fa-bars menu-icon"></i>
+                    </md-button>
+                    <h2 hide-gt-md>
+                        <span>{{ appName }}</span>
+                    </h2>
 
-	<!-- AngularJS itself -->
-	<script src="libs/angular.min.js"></script>
+                    <div class="input-container" flex>
+                        <input type="text" placeholder="" class="search-input">
+                        <md-button class="md-icon-button search-button" aria-label="Search" ng-click="">
+                            <i class="fa fa-search search-icon"></i>
+                        </md-button>
+                    </div>
 
-	<!-- ngTouch provides better support for touch input -->
-	<!-- <script src="libs/angular-touch.min.js"></script> -->
+                    <!--<span flex></span>-->
+                    <md-button class="md-icon-button" aria-label="Wish List">
+                        <i class="fa fa-check-square-o list-icon"></i>
+                    </md-button>
+                </div>
+            </md-toolbar>
 
-	<!-- ngRoute provides support for routing for SPA -->
-	<!-- <script src="libs/angular-route.min.js"></script> -->
 
-	<!-- ngAria adds support for accessibility -->
-	<!-- <script src="libs/angular-aria.min.js"></script> -->
+            <!--<div layout="column" layout-fill layout-align="top center">-->
+            <!--<p>-->
+            <!--The left sidenav will 'lock open' on a medium (>=960px wide) device.-->
+            <!--</p>-->
 
-	<!-- ngAnimate adds support for rhich CSS animations -->
-	<!-- <script src="libs/angular-animate.min.js"></script> -->
+            <!--<p>-->
+            <!--The right sidenav will focus on a specific child element.-->
+            <!--</p>-->
 
-	<!-- ngCookies adds an Angular wrapper for reading/writing cookies -->
-	<!-- <script src="libs/angular-cookies.min.js"></script> -->
+            <!--<div>-->
+            <!--<md-button ng-click="toggleLeft()"-->
+            <!--class="md-primary" hide-gt-md>-->
+            <!--Toggle left-->
+            <!--</md-button>-->
+            <!--</div>-->
+            <!--</div>-->
 
-	<!-- ngMessages adds support for enhanced (error) messages in forms and more -->
-	<!-- <script src="libs/angular-messages.min.js"></script> -->
+            <div ng-controller="cardController">
+                <md-content>
+                    <div class="card-container">
+                        <md-card class="card" ng-repeat="j in joboffers">
+                            <md-card-content>
+                                <div class="card-header">
+                                    <div class="card-header-avatar">
+                                        <img src="https://plus.google.com/_/favicon?domain=facebook.com"  class="material-avatar"> </div>
+                                        <div class="card-header-info">
+                                            <span  class="card-header-title">{{::j.company}}</span>
+                                            <span id="card-location" class="card-header-title">{{::j.location}}</span>
+                                        </div>
 
-	<!-- ngResource provides a service for interaction with REST service -->
-	<!-- <script src="libs/angular-resource.min.js"></script> -->
+                                    <!--<div class="card-header-info">-->
+                                    <!--<div>Location</div>-->
+                                    <!--<div>Valid date</div>-->
+                                    <!--</div>-->
+                                </div>
+                                <!--<hr>-->
+                                <div class="card-body">
+                                    <div class="card-body-title">{{::j.title}}</div>
+                                    <div class="card-body-text">
+                                        {{::j.description}}
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <md-button class="md-icon-button" aria-label="Add to Note List" style="width: 32px; height: 32px;">
+                                        <md-icon class="card-icon-button" md-svg-icon="img/icons/ic_bookmark_outline_48px.svg"/>
+                                    </md-button>
+                                <span class="card-footer-contact">
+                                 <md-button class="card-flat-button" style="margin-right: 4px"> Contact</md-button>
+                                </span>
+                                </div>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </md-content>
+            </div>
+        </md-content>
+    </section>
 
-	<!-- ngSanitize provides functionallity to sanitize HTML content -->
-	<!-- <script src="libs/angular-sanitize.min.js"></script> -->
+    <!-- AngularJS itself -->
+    <script src="libs/angular.min.js"></script>
 
-	<!-- Include all your script files here -->
-	<script src="scripts/module.js"></script>
+    <!-- ngTouch provides better support for touch input -->
+    <!-- <script src="libs/angular-touch.min.js"></script> -->
+
+    <!-- ngRoute provides support for routing for SPA -->
+    <!-- <script src="libs/angular-route.min.js"></script> -->
+
+    <!-- ngAria adds support for accessibility -->
+    <!-- <script src="libs/angular-aria.min.js"></script> -->
+
+    <!-- ngAnimate adds support for rhich CSS animations -->
+    <!-- <script src="libs/angular-animate.min.js"></script> -->
+
+    <!-- ngCookies adds an Angular wrapper for reading/writing cookies -->
+    <!-- <script src="libs/angular-cookies.min.js"></script> -->
+
+    <!-- ngMessages adds support for enhanced (error) messages in forms and more -->
+    <!-- <script src="libs/angular-messages.min.js"></script> -->
+
+    <!-- ngResource provides a service for interaction with REST service -->
+    <!-- <script src="libs/angular-resource.min.js"></script> -->
+
+    <!-- ngSanitize provides functionallity to sanitize HTML content -->
+    <!-- <script src="libs/angular-sanitize.min.js"></script> -->
+
+    <!-- Include all your script files here -->
+    <script src="scripts/module.js"></script>
 
 </body>
 </html>

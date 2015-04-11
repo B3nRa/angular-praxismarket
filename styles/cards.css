@@ -1,6 +1,10 @@
+.card-container {
+    position: relative;
+}
+
 .card {
     min-height: 150px;
-    width: 30rem;
+    width: 50rem;
     margin: 2rem auto;
 }
 
@@ -8,20 +12,19 @@
     margin-bottom: 0.5rem;
     position: relative;
     font-size: 20px;
-}
-
-.card-header * {
     vertical-align: middle;
 }
 
+
 .card-header-avatar {
     display: inline-block;
+    float:left;
 }
+
 
 .card-header-info {
     display: inline-block;
-    position: absolute;
-    right: 0px;
+    margin-top: 3px;
 }
 
 .card-header-title {
@@ -31,12 +34,32 @@
     text-overflow: ellipsis;
     overflow: hidden;
     color: #575757;
+    float:left;
+    clear:both;
 }
 
+#card-location {
+    font-weight: 400;
+    font-size: 13px;
+}
 
+.card-flat-button {
+    color: #FEA737;
+    font-size: 16px;
+    font-weight: 400;
+
+}
+path:hover{
+    fill:red;
+}
 .card-body {
     /*margin-top: 1rem;*/
     margin-bottom: 1rem;
+}
+
+.card-icon-button {
+    width: 26px;
+    height: 26px;
 }
 
 .card-body-title {
@@ -48,6 +71,13 @@
     overflow: hidden;
     color: #3F51B5;
     font-size: 22px;
+}
+
+.card-body-text {
+    font-weight: 400;
+    display: block;
+    font-size: 15px;
+    line-height: 1.6;
 }
 
 .card-footer {
@@ -74,8 +104,8 @@
 
 .material-avatar {
     vertical-align: middle;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     margin-right: 16px;
     border-radius: 50%;
     box-sizing: content-box;
