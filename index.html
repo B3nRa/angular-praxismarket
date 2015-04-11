@@ -55,16 +55,16 @@
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()" hide-gt-md >
-
                         <i class="fa fa-bars menu-icon"></i>
                     </md-button>
+
                     <h2 hide-gt-md style="min-width: 175px; margin-left: 8px">
                         <span>{{ appName }}</span>
                     </h2>
 
                     <div class="input-container">
                         <input type="text" placeholder="Search" class="search-input"
-                               ng-focus="focus()" ng-blur="blur()">
+                               ng-focus="focus()" ng-blur="blur()" ng-model="searchQuery">
                         <i class="fa fa-search search-icon" id="search-icon"></i>
                     </div>
 
@@ -95,7 +95,7 @@
             <div class="card-container-wrapper">
                 <md-content>
                     <div class="card-container">
-                        <md-card class="card" ng-repeat="j in joboffers">
+                        <md-card class="card" ng-repeat="j in joboffers | filter:searchQuery">
                             <md-card-content>
                                 <div class="card-header">
                                     <div ng-click="showCompanyDetails($event, 0)" class="card-header-avatar">
