@@ -84,6 +84,7 @@ path:hover {
 
 .card-footer {
     position: relative;
+    padding-bottom: 5px;
 }
 
 .card-footer-contact {
