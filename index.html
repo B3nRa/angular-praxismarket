@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="praxismarket">
 <head>
 	<title>Angular Starter Template</title>
 
@@ -18,10 +18,22 @@
 
 	<!-- Add styles -->
 	<link rel="stylesheet" type="text/css" href="styles/app.css">
-
+	<link rel="stylesheet" type="text/css" href="styles/cards.css">
 </head>
 <body>
-
+	<div ng-controller="cardController">
+		<md-content>
+			<md-card class="card">
+				<md-card-content>
+					<div class="card-header">
+						<img src="http://www.mediamarkt.de/favicon.ico">
+					</div>
+					<p>card content</p>
+					<p>other element</p>
+				</md-card-content>
+			</md-card>
+		</md-content>
+	</div>
 
 	<!-- AngularJS itself -->
 	<script src="libs/angular.min.js"></script>
