@@ -1,19 +1,26 @@
 angular.module('praxismarket', ['ngMaterial'])
     .factory('dataService', function () {
         var streamData = {};
+        var dialog;
         return {
-            getStreamData: function() {
+            getStreamData: function () {
                 return streamData;
             },
-            setStreamData: function(newStreamData) {
+            setStreamData: function (newStreamData) {
                 streamData = newStreamData;
             },
-            resetStreamData: function() {
+            resetStreamData: function () {
                 streamData = {};
+            },
+            getDialog: function () {
+                return dialog;
+            },
+            setDialog: function (newDialog) {
+                dialog = newDialog;
             }
         };
     })
-    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia) {
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog) {
         // ==============================
         // ===== General
         // ==============================
@@ -43,9 +50,9 @@ angular.module('praxismarket', ['ngMaterial'])
                     $log.debug("close LEFT is done");
                 });
         };
-        $scope.typeSelected = function(offer) {
+        $scope.typeSelected = function (offer) {
             console.log("selected: " + offer.shortname);
-            if($mdMedia('gt-md')) {
+            if ($mdMedia('gt-md')) {
                 // request for desktop
                 var offers = communicator.getOffersByType(offer.shortname);
             } else {
@@ -61,15 +68,15 @@ angular.module('praxismarket', ['ngMaterial'])
         // ==============================
         // ===== Cards
         // ==============================
-        $scope.$watch(function(scope) {
+        $scope.$watch(function (scope) {
             return dataService.getStreamData();
-        }, function(newVal, oldVal, scope) {
-            if(newVal !== oldVal) {
+        }, function (newVal, oldVal, scope) {
+            if (newVal !== oldVal) {
                 scope.joboffers = newVal;
             }
         }, true);
 
-        var offers =  [
+        var offers = [
             {
                 'company': 'Pharmakon Software GmbH',
                 'title': 'Werkstudent (m/w) - Kampagnen-Management / KA-DG141105',
@@ -91,6 +98,7 @@ angular.module('praxismarket', ['ngMaterial'])
         dataService.setStreamData(offers);
 
         $scope.showCompanyDetails = function (ev, companyId) {
+            ev.stopPropagation();
             var companies = [{
                 'name': 'FOOBAR COMPANY',
                 'description': 'Lorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
@@ -127,20 +135,20 @@ angular.module('praxismarket', ['ngMaterial'])
         };
 
 
-        function DialogController($scope, $mdDialog, company) {
+        function DialogController($scope, $mdDialog, dataService, company) {
             $scope.company = company;
+            dataService.setDialog($mdDialog);
 
-            $scope.hide = function () {
-                $mdDialog.hide();
-            };
-            $scope.cancel = function () {
-                $mdDialog.cancel();
-            };
-            $scope.answer = function (answer) {
-                $mdDialog.hide(answer);
-            };
-            $scope.closeDialog = function () {
-                $mdDialog.hide();
+            $scope.stopPropagation = function (event) {
+                event.stopPropagation();
+            }
+        }
+
+        $scope.closeDialog = function () {
+            var dialog = dataService.getDialog();
+            if (dialog) {
+                dataService.setDialog(undefined);
+                dialog.hide();
             }
         }
     })
