@@ -13,7 +13,7 @@ angular.module('praxismarket', ['ngMaterial'])
             }
         };
     })
-    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia) {
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $window, $log) {
         // ==============================
         // ===== General
         // ==============================
@@ -44,13 +44,16 @@ angular.module('praxismarket', ['ngMaterial'])
                 });
         };
         $scope.typeSelected = function(offer) {
+            $scope.selectedType = offer.shortname;
             console.log("selected: " + offer.shortname);
             if($mdMedia('gt-md')) {
                 // request for desktop
                 var offers = communicator.getOffersByType(offer.shortname);
+                $scope.moreOffersAvailable = false;
             } else {
                 // request on mobile
                 var offers = communicator.getOffersByType(offer.shortname, 10);
+                $scope.moreOffersAvailable = true;
             }
 
             dataService.setStreamData(offers);
@@ -68,6 +71,12 @@ angular.module('praxismarket', ['ngMaterial'])
                 scope.joboffers = newVal;
             }
         }, true);
+
+        $scope.loadMoreOffers = function() {
+            var currentCardCount = $window.document.getElementsByClassName("card").length;
+            var moreOffers = communicator.getMoreOffersByType($scope.selectedType, currentCardCount);
+            dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
+        }
 
         var offers =  [
             {
