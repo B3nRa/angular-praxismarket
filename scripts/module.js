@@ -13,10 +13,9 @@ angular.module('praxismarket', ['ngMaterial'])
             }
         };
     })
-    .controller('MainController', function ($scope) {
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia) {
         $scope.appName = "Praxis Market";
-    })
-    .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+
         $scope.toggleLeft = function () {
             $mdSidenav('left').toggle()
                 .then(function () {
@@ -31,8 +30,7 @@ angular.module('praxismarket', ['ngMaterial'])
             console.log("unfocus");
             angular.element(document.getElementById('search-icon')).removeClass("focus");
         }
-    })
-    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log, dataService, $mdMedia) {
+
         $scope.close = function () {
             $mdSidenav('left').close()
                 .then(function () {
@@ -53,8 +51,7 @@ angular.module('praxismarket', ['ngMaterial'])
         };
 
         $scope.offerTypes = communicator.getAllOfferTypes();
-    })
-    .controller('cardController', function ($scope, $mdDialog, dataService) {
+
         $scope.$watch(function(scope) {
             return dataService.getStreamData();
         }, function(newVal, oldVal, scope) {
