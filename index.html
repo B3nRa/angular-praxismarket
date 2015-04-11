@@ -44,19 +44,18 @@
                         <!--<md-icon md-svg-icon="img/icons/menu.svg"></md-icon>-->
                         <i class="fa fa-bars menu-icon"></i>
                     </md-button>
-                    <h2 hide-gt-md>
+                    <h2 hide-gt-md style="min-width: 175px; margin-left: 8px">
                         <span>{{ appName }}</span>
                     </h2>
-                    <div class="input-container" flex>
-                        <input type="text" placeholder="" class="search-input">
-                        <md-button class="md-icon-button search-button" aria-label="Search" ng-click="">
-                            <i class="fa fa-search search-icon"></i>
-                        </md-button>
+                    <div class="input-container">
+                        <input type="text" placeholder="Search" class="search-input"
+                               ng-focus="focus()" ng-blur="blur()">
+                            <i class="fa fa-search search-icon" id="search-icon"></i>
                     </div>
 
                     <!--<span flex></span>-->
                     <md-button class="md-icon-button" aria-label="Wish List">
-                        <i class="fa fa-check-square-o list-icon"></i>
+                        <i class="fa fa-clipboard list-icon"></i>
                     </md-button>
                 </div>
             </md-toolbar>

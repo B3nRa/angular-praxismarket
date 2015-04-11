@@ -9,6 +9,14 @@ angular.module('praxismarket', ['ngMaterial'])
                     $log.debug("toggle left is done");
                 });
         };
+        $scope.focus = function() {
+            console.log("focus");
+            angular.element(document.getElementById('search-icon')).addClass("focus");
+        };
+        $scope.blur = function() {
+            console.log("unfocus");
+            angular.element(document.getElementById('search-icon')).removeClass("focus");
+        }
     })
     .controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
         $scope.close = function() {
@@ -17,5 +25,10 @@ angular.module('praxismarket', ['ngMaterial'])
                     $log.debug("close LEFT is done");
                 });
         };
+    })
+    .config(function($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('indigo')
+            .accentPalette('orange');
     });
 

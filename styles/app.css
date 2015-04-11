@@ -22,25 +22,58 @@ html, body {
 }
 
 .menu-icon,
-.list-icon,
-.search-icon {
+.list-icon {
 	padding: 8px;
+	color: white;
 }
 
 .input-container {
-	background-color: black;
+	width: 100%;
 }
 
 .search-input {
-	background-color: white;
+	background-color: #7986CB;
 	width: 100%;
 	padding: 4px 4px 4px 40px;
+	border: 0;
+	color: white;
+	font-weight: 100;
+	margin-top: 20px;
 }
-.search-button {
-	color: black !important;
+.search-input:focus {
+	background-color: white;
+	color: black;
+}
+.search-input::-webkit-input-placeholder {
+	color:   white;
+	opacity: 1;
+	font-weight: 100;
+}
+.search-input:-moz-placeholder {
+	color:   white;
+	opacity: 1;
+	font-weight: 100;
+}
+.search-input::-moz-placeholder {
+	color:   white;
+	opacity: 1;
+	font-weight: 100;
+}
+.search-input:-ms-input-placeholder {
+	color:   white;
+	opacity: 1;
+	font-weight: 100;
+}
+
+
+.search-icon {
+	color: white !important;
 	float: left;
 
-	position: absolute;
-	top: 16px;
-	left: 24px;
+	position: relative;
+	top: -28px;
+	left: 8px;
+}
+.focus {
+	color: black !important;
 }
