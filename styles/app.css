@@ -77,3 +77,8 @@ html, body {
 .focus {
 	color: black !important;
 }
+
+.nav-icon {
+	font-size: 32px;
+	padding: 16px 16px;
+}

@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 
 	<!-- Angulars Material CSS now available via Google CDN; version 0.8 used here -->
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+	<link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
 
     <!-- Angular Material Dependencies -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
@@ -16,7 +16,7 @@
     <script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
 
     <!-- Angular Material Javascript now available via Google CDN; version 0.8 used here -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
+	<script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
 
 	<!-- Add styles -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -32,9 +32,15 @@
                 <h1 class="md-toolbar-tools">{{ appName }}</h1>
             </md-toolbar>
             <md-content layout-padding ng-controller="LeftCtrl">
-                <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                    Close Sidenav Left
-                </md-button>
+                <md-list>
+                    <md-list-item class="md-2-line">
+                        <i class="fa fa-book nav-icon"></i>
+                        <div class="md-list-item-text">
+                            <h3>Foo List Item 1</h3>
+                            <p>asdasdasd</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
             </md-content>
         </md-sidenav>
         <md-content flex layout-padding>
