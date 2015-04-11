@@ -84,8 +84,22 @@
                 }
             ];
             return moreOffers;
-        }
+        },
+        getNotePad: function(cb) {
+            var url = internal.serviceUrl + "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/notepad/0/-1";
+            var request = new XMLHttpRequest();
+            request.open('GET', url, true);  // `false` makes the request synchronous
+            request.onload = function () {
+                var jsonObj = JSON.parse(request.responseText);
 
+                for (var i in jsonObj.offers) {
+                    jsonObj.offers[i].company = jsonObj.companies[jsonObj.offers[i].companyId];
+                }
+
+                cb(jsonObj.offers);
+            }
+            request.send(null);
+        }
     };
 
     global.communicator = {
@@ -97,6 +111,9 @@
         },
         getMoreOffersByType: function (type, count) {
             return internal.getMoreOffersByType(type, count);
+        },
+        getNotePad: function(cb) {
+            return internal.getNotePad(cb);
         }
     };
 }(window));

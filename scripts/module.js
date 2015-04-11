@@ -80,7 +80,12 @@ angular.module('praxismarket', ['ngMaterial'])
         // ==============================
         // ===== Wish List
         // ==============================
-        
+        $scope.loadWishList = function() {
+            communicator.getNotePad(function (offers) {
+                $scope.joboffers = offers;
+                $scope.$apply();
+            })
+        }
 
         // ==============================
         // ===== Cards
