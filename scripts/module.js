@@ -63,6 +63,11 @@ angular.module('praxismarket', ['ngMaterial'])
         $scope.offerTypes = communicator.getAllOfferTypes();
 
         // ==============================
+        // ===== Wish List
+        // ==============================
+        
+
+        // ==============================
         // ===== Cards
         // ==============================
         $scope.$watch(function(scope) {
