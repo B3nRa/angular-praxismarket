@@ -18,11 +18,10 @@
 
     <!-- Readmore and JQuery -->
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="/libs/readmore.min.js"></script>
+    <script type="text/javascript" src="http://viralpatel.net/blogs/demo/jquery/jquery.shorten.1.0.js"></script>
 
     <!-- Angular Material Javascript now available via Google CDN; version 0.8 used here -->
     <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
-
 
 	<!-- Add styles -->
     <link rel="stylesheet" type="text/css" href="styles/cards.css">
@@ -99,7 +98,7 @@
             <!--</div>-->
             
             <div class="card-container-wrapper">
-                <md-content style="background-color: #ECECEC;">
+                <md-content>
                     <div class="card-container">
                         <md-card class="card" ng-repeat="j in joboffers | filter:searchQuery">
                             <md-card-content>
@@ -185,23 +184,7 @@
             <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next</button>
         </div>
     </script>
-    <script>
-        $('.card-body-text').each(function() {
-            if($(this).innerHeight() > 150){
-                $(this).readmore({
-                    moreLink: '<a href="#" class="read-more-link">Show more text ></a>',
-                    lessLink: '<a href="#" class="read-less-link">&lt; Show less text</a>',
-                    maxHeight: 228,
-                    speed: 200,
-                    afterToggle: function(trigger, element, expanded) {
-                        if(! expanded) { // The "Close" link was clicked
-                            $('html, body').animate( { scrollTop: element.offset().top }, {duration: 100 } );
-                        }
-                    }
-                });
-            }
-        });
-    </script>
+    <script type="text/javascript">$(document).ready(function(){$(".card-body-text").shorten({"showChars" : 380});});</script>
 </div>
 </body>
 </html>
