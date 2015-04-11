@@ -1,5 +1,13 @@
-angular.module('praxismarket', 
-['ngMaterial'])
+<<<<<<< HEAD
+angular.module('praxismarket', [])
+.controller('cardController', function($scope){
+        $scope.joboffers = [
+            {'company': 'Foo', 'title': 'Bar', 'location': 'Karlsruhe', 'firstname': 'Susanne', 'lastname': 'Sonne'},
+            {'company': 'Blub', 'title': 'Hihi', 'location': 'Berlin', 'firstname': 'Susanne', 'lastname': 'Sonne'}
+        ];
+    });
+=======
+angular.module('praxismarket', ['ngMaterial'])
     .controller('MainController', function($scope) {
         $scope.appName = "Praxis Market";
     })
@@ -18,9 +26,6 @@ angular.module('praxismarket',
                     $log.debug("close LEFT is done");
                 });
         };
-.controller('cardController', function($scope){
-        $scope.joboffers = [
-            {'company': 'Foo', 'title': 'Bar', 'location': 'Karlsruhe', 'firstname': 'Susanne', 'lastname': 'Sonne'},
-            {'company': 'Blub', 'title': 'Hihi', 'location': 'Berlin', 'firstname': 'Susanne', 'lastname': 'Sonne'}
-        ];
     });
+
+>>>>>>> 8568e8854a852a3acb7c7fbb4e900973283988ae
