@@ -1,4 +1,4 @@
-ï»¿angular.module('praxismarket', ['ngMaterial'])
+angular.module('praxismarket', ['ngMaterial'])
     .controller('MainController', function ($scope) {
         $scope.appName = "Praxis Market";
     })
@@ -10,13 +10,15 @@
                 });
         };
     })
-    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log, $http) {
         $scope.close = function () {
             $mdSidenav('left').close()
                 .then(function () {
                     $log.debug("close LEFT is done");
                 });
         };
+
+
     }).
     controller('cardController', function ($scope, $mdDialog) {
         $scope.joboffers = [
@@ -24,11 +26,11 @@
                 'company': 'Pharmakon Software GmbH',
                 'title': 'Werkstudent (m/w) - Kampagnen-Management / KA-DG141105',
                 'location': 'Karlsruhe',
-                'description': 'Du arbeitest gern eng mit GrÃ¼ndern zusammen, lernst das operative GeschÃ¤ft eines Startups kennen und bist bei der Entwicklung von neuen Ideen hautnah dabei? Dann ist dieses Praktikum genau richtig fÃ¼r dich. Was Dich erwartet # Du bekommst Einblicke in Bereiche wie Produktentwicklung, Algorithmen, Marketing und Finanzierung # Du betreust eigenstÃ¤ndig Projekte und setzt eigene Ideen um # Du profitierst wÃ¤hrend und nach dem Praktikum vom Netzwerk der GrÃ¼nder, die dir als Mentoren fÃ¼r die Umsetzung eigener GeschÃ¤ftsideen zur VerfÃ¼gung stehen # Du Ã¼bernimmst Verantwortung und arbeitest selbstÃ¤ndig, wofÃ¼r dir ein moderner Arbeitsplatz zur VerfÃ¼gung steht Was Du mitbringen solltest # Du hast Interesse an Unternehmertum oder spielst mit dem Gedanken spÃ¤ter selbst zu grÃ¼nden # Du glaubst auch, dass es an der Zeit ist Spam-Werbung durch interessante Newsletter zu ersetzen # Du bist offen und arbeitest gerne mit Menschen # Du lernst dich schnell in neue Sachverhalte ein und scheust nicht davor zurÃ¼ck tatkrÃ¤ftig in einem Team mitzuarbeiten # Du bringst 3 bis 6 Monate Zeit mit und sprichst flieÃŸend Deutsch oder Englisch',
+                'description': 'Du arbeitest gern eng mit Gründern zusammen, lernst das operative Geschäft eines Startups kennen und bist bei der Entwicklung von neuen Ideen hautnah dabei? Dann ist dieses Praktikum genau richtig für dich. Was Dich erwartet # Du bekommst Einblicke in Bereiche wie Produktentwicklung, Algorithmen, Marketing und Finanzierung # Du betreust eigenständig Projekte und setzt eigene Ideen um # Du profitierst während und nach dem Praktikum vom Netzwerk der Gründer, die dir als Mentoren für die Umsetzung eigener Geschäftsideen zur Verfügung stehen # Du übernimmst Verantwortung und arbeitest selbständig, wofür dir ein moderner Arbeitsplatz zur Verfügung steht Was Du mitbringen solltest # Du hast Interesse an Unternehmertum oder spielst mit dem Gedanken später selbst zu gründen # Du glaubst auch, dass es an der Zeit ist Spam-Werbung durch interessante Newsletter zu ersetzen # Du bist offen und arbeitest gerne mit Menschen # Du lernst dich schnell in neue Sachverhalte ein und scheust nicht davor zurück tatkräftig in einem Team mitzuarbeiten # Du bringst 3 bis 6 Monate Zeit mit und sprichst fließend Deutsch oder Englisch',
                 'firstname': 'Susanne',
                 'lastname': 'Sonne'
             },
-            {'company': 'PROCAD GmbH & Co. KG', 'title': 'Bachelor- oder Master- Abschlussarbeit - Evaluation von Systemen zur Speicherung und Realtime-Analyse groÃŸer Datenmengen', 'location': 'Berlin','description': 'Du bist kommunikativ und arbeitest gerne mit Menschen, dich stÃ¶ren schlechte Newsletter, wie sie heute leider Ã¼blich sind, du trÃ¤gst lieber Verantwortung als dich im Konzern zu verstecken? Dann ist dieses Praktikum genau richtig fÃ¼r dich. Was Dich erwartet. # Ein ehrgeiziges, begeistertes Team # Ein innovatives Produkt "on the edge of technology" # Du lernst vom ersten Tag, wie man Marketing und Vertrieb in einem jungen IT-Unternehmen aufbaut # Du betreust eigenstÃ¤ndig Projekte und setzt eigene Ideen um # Du Ã¼bernimmst Verantwortung und arbeitest selbstÃ¤ndig, wofÃ¼r dir ein moderner Ã¤rbeitsplatz zur VerfÃ¼gung steht Was Du mitbringen solltest # Lust in einem au strebenden Startup zu arbeiten # Freude an der Kommunkation mit Menschen # Laufendes Studium an einer Hochschule oder UniversitÃ¤t # Begeisterung und selbstÃ¤ndiges arbeiten Weitere Details siehe PDF-Ausschreibung.', 'firstname': 'Lisa', 'lastname': 'GÃ¶pferich'}
+            {'company': 'PROCAD GmbH & Co. KG', 'title': 'Bachelor- oder Master- Abschlussarbeit - Evaluation von Systemen zur Speicherung und Realtime-Analyse großer Datenmengen', 'location': 'Berlin','description': 'Du bist kommunikativ und arbeitest gerne mit Menschen, dich stören schlechte Newsletter, wie sie heute leider üblich sind, du trägst lieber Verantwortung als dich im Konzern zu verstecken? Dann ist dieses Praktikum genau richtig für dich. Was Dich erwartet. # Ein ehrgeiziges, begeistertes Team # Ein innovatives Produkt "on the edge of technology" # Du lernst vom ersten Tag, wie man Marketing und Vertrieb in einem jungen IT-Unternehmen aufbaut # Du betreust eigenständig Projekte und setzt eigene Ideen um # Du übernimmst Verantwortung und arbeitest selbständig, wofür dir ein moderner ärbeitsplatz zur Verfügung steht Was Du mitbringen solltest # Lust in einem au strebenden Startup zu arbeiten # Freude an der Kommunkation mit Menschen # Laufendes Studium an einer Hochschule oder Universität # Begeisterung und selbständiges arbeiten Weitere Details siehe PDF-Ausschreibung.', 'firstname': 'Lisa', 'lastname': 'Göpferich'}
         ];
 
         $scope.showCompanyDetails = function(ev, companyId){
