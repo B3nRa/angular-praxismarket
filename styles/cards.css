@@ -1,0 +1,165 @@
+.card-container {
+    position: relative;
+}
+
+.card {
+    min-height: 150px;
+    width: 50rem;
+    margin: 2rem auto;
+}
+
+.card-header {
+    margin-bottom: 0.5rem;
+    position: relative;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+
+.card-header-avatar {
+    display: inline-block;
+    float:left;
+}
+
+
+.card-header-info {
+    display: inline-block;
+    margin-top: 3px;
+}
+
+.card-header-title {
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #575757;
+    float:left;
+    clear:both;
+}
+
+#card-location {
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.card-flat-button {
+    color: #FEA737;
+    font-size: 16px;
+    font-weight: 400;
+
+}
+path:hover{
+    fill:red;
+}
+.card-body {
+    /*margin-top: 1rem;*/
+    margin-bottom: 1rem;
+}
+
+.card-icon-button {
+    width: 26px;
+    height: 26px;
+}
+
+.card-body-title {
+    margin-bottom: 0.5rem;
+    line-height: 48px;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #3F51B5;
+    font-size: 22px;
+}
+
+.card-body-text {
+    font-weight: 400;
+    display: block;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.card-footer {
+    position: relative;
+}
+
+.card-footer-contact {
+    position: absolute;
+    right: 0px;
+}
+
+.card-footer-contact-info {
+    margin-left: 0.3rem;
+}
+
+.card-footer-contact-info a {
+    text-decoration: none;
+}
+
+.horizontal-separator {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.material-avatar {
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    padding: 6px;
+    background-color: rgba(240, 240, 240, 0.21);
+    border: 2px solid #FFF;
+    box-shadow: 0 0 1px #888;
+}
+
+.sticky-container {
+
+}
+
+.dialog-company {
+    margin: 1rem 0rem 1rem 1rem;
+}
+
+.dialog-company-header {
+    margin-bottom: 2rem;
+}
+
+.dialog-company-header-basic {
+    display: inline-block;
+    margin-right: 2rem;
+}
+
+.dialog-company-header-numbers {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 1rem;
+}
+
+.dialog-container-company{
+    width: 30%;
+}
+
+/*.dialogdemoBasicUsage .dialogDemo1 {*/
+    /*height: 500px; }*/
+/*.dialogdemoBasicUsage .full {*/
+    /*width: 100%;*/
+    /*height: 100%; }*/
+/*.dialogdemoBasicUsage .gap {*/
+    /*width: 50px; }*/
+/*.dialogdemoBasicUsage md-dialog md-content.sticky-container {*/
+    /*padding: 0; }*/
+/*.dialogdemoBasicUsage md-dialog md-content.sticky-container .dialog-content {*/
+    /*padding: 0 24px 24px; }*/
+/*.dialogdemoBasicUsage .md-subheader {*/
+    /*background-color: #dcedc8;*/
+    /*margin: 0; }*/
+/*.dialogdemoBasicUsage h2.md-subheader.md-sticky-clone {*/
+    /*margin-right: 0;*/
+    /*margin-top: 0;*/
+    /*box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.16); }*/
+/*.dialogdemoBasicUsage h2 .md-subheader-content {*/
+    /*padding-left: 10px; }*/
+

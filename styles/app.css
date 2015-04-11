@@ -2,83 +2,51 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,300italic,500,500italic,700,700italic);
 
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-	margin: 0;
-	padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
 }
 
 .toolbardemoBasicUsage md-toolbar md-icon.md-default-theme {
-	color: white; }
+    color: white;
+}
 
 .md-default-theme {
-	padding: 0;
+    padding: 0;
 }
 
 .menu-icon,
-.list-icon {
-	padding: 8px;
-	color: white;
+.list-icon,
+.search-icon {
+    padding: 8px;
 }
 
 .input-container {
-	width: 100%;
+    background-color: black;
 }
 
 .search-input {
-	background-color: #7986CB;
-	width: 100%;
-	padding: 4px 4px 4px 40px;
-	border: 0;
-	color: white;
-	font-weight: 100;
-	margin-top: 20px;
-}
-.search-input:focus {
-	background-color: white;
-	color: black;
-}
-.search-input::-webkit-input-placeholder {
-	color:   white;
-	opacity: 1;
-	font-weight: 100;
-}
-.search-input:-moz-placeholder {
-	color:   white;
-	opacity: 1;
-	font-weight: 100;
-}
-.search-input::-moz-placeholder {
-	color:   white;
-	opacity: 1;
-	font-weight: 100;
-}
-.search-input:-ms-input-placeholder {
-	color:   white;
-	opacity: 1;
-	font-weight: 100;
+    background-color: white;
+    width: 100%;
+    padding: 4px 4px 4px 40px;
 }
 
+.search-button {
+    color: black !important;
+    float: left;
 
-.search-icon {
-	color: white !important;
-	float: left;
-
-	position: relative;
-	top: -28px;
-	left: 8px;
-}
-.focus {
-	color: black !important;
+    position: absolute;
+    top: 16px;
+    left: 24px;
 }
 
-.nav-icon {
-	font-size: 32px;
-	padding: 16px 16px;
+.primary-color {
+    color: rgb(63, 81, 181);
 }

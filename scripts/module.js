@@ -1,92 +1,4 @@
-var encryptedPassword = "xQMwatX6djp1dA_CS2PZly16LJN8P8gSrqMSpCsjTP-mxaw95OhmZQ";
-var base64Auth = "bXVoZTEwMTU6eFFNd2F0WDZkanAxZEFfQ1MyUFpseTE2TEpOOFA4Z1NycU1TcENzalRQLW14YXc5NU9obVpR";
-
-angular.module('praxismarket', ['ngMaterial'])
-    .factory('Base64', function () {
-        var keyStr = 'ABCDEFGHIJKLMNOP' +
-            'QRSTUVWXYZabcdef' +
-            'ghijklmnopqrstuv' +
-            'wxyz0123456789+/' +
-            '=';
-        return {
-            encode: function (input) {
-                var output = "";
-                var chr1, chr2, chr3 = "";
-                var enc1, enc2, enc3, enc4 = "";
-                var i = 0;
-
-                do {
-                    chr1 = input.charCodeAt(i++);
-                    chr2 = input.charCodeAt(i++);
-                    chr3 = input.charCodeAt(i++);
-
-                    enc1 = chr1 >> 2;
-                    enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-                    enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-                    enc4 = chr3 & 63;
-
-                    if (isNaN(chr2)) {
-                        enc3 = enc4 = 64;
-                    } else if (isNaN(chr3)) {
-                        enc4 = 64;
-                    }
-
-                    output = output +
-                    keyStr.charAt(enc1) +
-                    keyStr.charAt(enc2) +
-                    keyStr.charAt(enc3) +
-                    keyStr.charAt(enc4);
-                    chr1 = chr2 = chr3 = "";
-                    enc1 = enc2 = enc3 = enc4 = "";
-                } while (i < input.length);
-
-                return output;
-            },
-
-            decode: function (input) {
-                var output = "";
-                var chr1, chr2, chr3 = "";
-                var enc1, enc2, enc3, enc4 = "";
-                var i = 0;
-
-                // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
-                var base64test = /[^A-Za-z0-9\+\/\=]/g;
-                if (base64test.exec(input)) {
-                    alert("There were invalid base64 characters in the input text.\n" +
-                    "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
-                    "Expect errors in decoding.");
-                }
-                input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-
-                do {
-                    enc1 = keyStr.indexOf(input.charAt(i++));
-                    enc2 = keyStr.indexOf(input.charAt(i++));
-                    enc3 = keyStr.indexOf(input.charAt(i++));
-                    enc4 = keyStr.indexOf(input.charAt(i++));
-
-                    chr1 = (enc1 << 2) | (enc2 >> 4);
-                    chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-                    chr3 = ((enc3 & 3) << 6) | enc4;
-
-                    output = output + String.fromCharCode(chr1);
-
-                    if (enc3 != 64) {
-                        output = output + String.fromCharCode(chr2);
-                    }
-                    if (enc4 != 64) {
-                        output = output + String.fromCharCode(chr3);
-                    }
-
-                    chr1 = chr2 = chr3 = "";
-                    enc1 = enc2 = enc3 = enc4 = "";
-
-                } while (i < input.length);
-
-                return output;
-            }
-        }
-    }
-)
+﻿angular.module('praxismarket', ['ngMaterial'])
     .controller('MainController', function ($scope) {
         $scope.appName = "Praxis Market";
     })
@@ -97,34 +9,84 @@ angular.module('praxismarket', ['ngMaterial'])
                     $log.debug("toggle left is done");
                 });
         };
-        $scope.focus = function () {
-            console.log("focus");
-            angular.element(document.getElementById('search-icon')).addClass("focus");
-        };
-        $scope.blur = function () {
-            console.log("unfocus");
-            angular.element(document.getElementById('search-icon')).removeClass("focus");
-        }
     })
-    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log, $http, Base64) {
+    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
         $scope.close = function () {
             $mdSidenav('left').close()
                 .then(function () {
                     $log.debug("close LEFT is done");
                 });
         };
+    }).
+    controller('cardController', function ($scope, $mdDialog) {
+        $scope.joboffers = [
+            {
+                'company': 'Pharmakon Software GmbH',
+                'title': 'Werkstudent (m/w) - Kampagnen-Management / KA-DG141105',
+                'location': 'Karlsruhe',
+                'description': 'Du arbeitest gern eng mit Gründern zusammen, lernst das operative Geschäft eines Startups kennen und bist bei der Entwicklung von neuen Ideen hautnah dabei? Dann ist dieses Praktikum genau richtig für dich. Was Dich erwartet # Du bekommst Einblicke in Bereiche wie Produktentwicklung, Algorithmen, Marketing und Finanzierung # Du betreust eigenständig Projekte und setzt eigene Ideen um # Du profitierst während und nach dem Praktikum vom Netzwerk der Gründer, die dir als Mentoren für die Umsetzung eigener Geschäftsideen zur Verfügung stehen # Du übernimmst Verantwortung und arbeitest selbständig, wofür dir ein moderner Arbeitsplatz zur Verfügung steht Was Du mitbringen solltest # Du hast Interesse an Unternehmertum oder spielst mit dem Gedanken später selbst zu gründen # Du glaubst auch, dass es an der Zeit ist Spam-Werbung durch interessante Newsletter zu ersetzen # Du bist offen und arbeitest gerne mit Menschen # Du lernst dich schnell in neue Sachverhalte ein und scheust nicht davor zurück tatkräftig in einem Team mitzuarbeiten # Du bringst 3 bis 6 Monate Zeit mit und sprichst fließend Deutsch oder Englisch',
+                'firstname': 'Susanne',
+                'lastname': 'Sonne'
+            },
+            {'company': 'PROCAD GmbH & Co. KG', 'title': 'Bachelor- oder Master- Abschlussarbeit - Evaluation von Systemen zur Speicherung und Realtime-Analyse großer Datenmengen', 'location': 'Berlin','description': 'Du bist kommunikativ und arbeitest gerne mit Menschen, dich stören schlechte Newsletter, wie sie heute leider üblich sind, du trägst lieber Verantwortung als dich im Konzern zu verstecken? Dann ist dieses Praktikum genau richtig für dich. Was Dich erwartet. # Ein ehrgeiziges, begeistertes Team # Ein innovatives Produkt "on the edge of technology" # Du lernst vom ersten Tag, wie man Marketing und Vertrieb in einem jungen IT-Unternehmen aufbaut # Du betreust eigenständig Projekte und setzt eigene Ideen um # Du übernimmst Verantwortung und arbeitest selbständig, wofür dir ein moderner ärbeitsplatz zur Verfügung steht Was Du mitbringen solltest # Lust in einem au strebenden Startup zu arbeiten # Freude an der Kommunkation mit Menschen # Laufendes Studium an einer Hochschule oder Universität # Begeisterung und selbständiges arbeiten Weitere Details siehe PDF-Ausschreibung.', 'firstname': 'Lisa', 'lastname': 'Göpferich'}
+        ];
 
-        //$http.defaults.headers.common['Authorization'] = 'Basic ' + "bXVoZTEwMTU6eFFNd2F0WDZkanAxZEFfQ1MyUFpseTE2TEpOOFA4Z1NycU1TcENzalRQLW14YXc5NU9obVpR";
-        $http({method: 'GET', url: 'http://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/offertypes/all'})
-            //.then(function (response) {
-            //    console.log("foo");
-            //    window.datafoo = response;
-            //    $scope.offertTypes = response.data;
-            //})
-    })
-    .config(function ($mdThemingProvider) {
-        $mdThemingProvider.theme('default')
-            .primaryPalette('indigo')
-            .accentPalette('orange');
+        $scope.showCompanyDetails = function(ev, companyId){
+            var companies = [{ 'name': 'FOOBAR COMPANY',
+                'description': 'Lorem Ipsum',
+                'website': 'http://drop.social',
+                'street': 'Philippstr.',
+                'city': 'Karlsruhe',
+                'numberOfEmployees': '9',
+                'country': 'Germany'}];
+            var company = companies[companyId];
+            $scope.companyDetails = {
+                'name': company.name,
+                'description': company.description,
+                'website': company.website,
+                'street': company.street,
+                'city': company.city,
+                'numberOfEmployees': company.numberOfEmployees,
+                'country': company.country
+            }
+
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'companyDetails.template.html',
+                targetEvent: ev,
+                resolve: {company: function(){ return company;}}
+            })
+                .then(function(answer) {
+                    $scope.alert = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.alert = 'You cancelled the dialog.';
+                });
+        }
+
+        $scope.showAdvanced = function(ev) {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'companyDetails.template.html',
+                targetEvent: ev
+            })
+                .then(function(answer) {
+                    $scope.alert = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.alert = 'You cancelled the dialog.';
+                });
+        };
+
+        function DialogController($scope, $mdDialog, company) {
+            $scope.company = company;
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.answer = function(answer) {
+                $mdDialog.hide(answer);
+            };
+        }
     });
-
