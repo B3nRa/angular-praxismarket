@@ -88,10 +88,10 @@
                         <md-card class="card" ng-repeat="j in joboffers">
                             <md-card-content>
                                 <div class="card-header">
-                                    <div class="card-header-avatar">
+                                    <div ng-click="showCompanyDetails($event, 0)" class="card-header-avatar">
                                         <img src="https://plus.google.com/_/favicon?domain=facebook.com"  class="material-avatar"> </div>
                                     <div class="card-header-info">
-                                        <span  class="card-header-title">{{::j.company}}</span>
+                                        <span ng-click="showCompanyDetails($event, 0)" class="card-header-title">{{::j.company}}</span>
                                         <span id="card-location" class="card-header-title">{{::j.location}}</span>
                                     </div>
 
