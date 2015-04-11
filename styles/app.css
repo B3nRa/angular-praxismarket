@@ -14,3 +14,33 @@ html, body {
 	padding: 0;
 }
 
+.toolbardemoBasicUsage md-toolbar md-icon.md-default-theme {
+	color: white; }
+
+.md-default-theme {
+	padding: 0;
+}
+
+.menu-icon,
+.list-icon,
+.search-icon {
+	padding: 8px;
+}
+
+.input-container {
+	background-color: black;
+}
+
+.search-input {
+	background-color: white;
+	width: 100%;
+	padding: 4px 4px 4px 40px;
+}
+.search-button {
+	color: black !important;
+	float: left;
+
+	position: absolute;
+	top: 16px;
+	left: 24px;
+}
