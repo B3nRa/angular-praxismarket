@@ -2,9 +2,21 @@
     'use strict';
 
     var internal = {
-        serviceUrl: "http://praxis-market.appspot.com/apis?url=",
+        serviceUrl: "http://praxis-market.appspot.com/?url=",
         getAllOfferTypes: function () {
             // TODO: icon is added manually -> build a switch statement for real implementation
+
+            var url = internal.serviceUrl + "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/offertypes/all"
+            var request = new XMLHttpRequest();
+            request.open('GET', url, false);  // `false` makes the request synchronous
+            request.send(null);
+            if (request.status === 200) {
+                console.log(request.responseText);
+            } else {
+                global.wtfoo = request;
+                console.log("fuck");
+            }
+
             var allOfferTypes = [
                 {"id": 9, "name": "Abschlussarbeit", "shortname": "thesis", "icon": "fa-graduation-cap"},
                 {"id": 3, "name": "Praxissemester", "shortname": "internship", "icon": "fa-wrench"},
