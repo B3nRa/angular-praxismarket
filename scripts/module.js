@@ -66,6 +66,7 @@ angular.module('praxismarket', ['ngMaterial'])
                 // request on mobile
                 communicator.getOffersByType(offer.shortname, 10, offerCallback);
                 $scope.moreOffersAvailable = true;
+                $scope.close();
             }
 
             //dataService.setStreamData(offers);
@@ -75,6 +76,11 @@ angular.module('praxismarket', ['ngMaterial'])
             $scope.offerTypes = offers;
             $scope.$apply();
         });
+
+        // ==============================
+        // ===== Wish List
+        // ==============================
+        
 
         // ==============================
         // ===== Cards
