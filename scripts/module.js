@@ -20,7 +20,7 @@ angular.module('praxismarket', ['ngMaterial'])
             }
         };
     })
-    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog) {
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia) {
         // ==============================
         // ===== General
         // ==============================
@@ -50,14 +50,17 @@ angular.module('praxismarket', ['ngMaterial'])
                     $log.debug("close LEFT is done");
                 });
         };
-        $scope.typeSelected = function (offer) {
+        $scope.typeSelected = function(offer) {
+            $scope.selectedType = offer.shortname;
             console.log("selected: " + offer.shortname);
             if ($mdMedia('gt-md')) {
                 // request for desktop
                 var offers = communicator.getOffersByType(offer.shortname);
+                $scope.moreOffersAvailable = false;
             } else {
                 // request on mobile
                 var offers = communicator.getOffersByType(offer.shortname, 10);
+                $scope.moreOffersAvailable = true;
             }
 
             dataService.setStreamData(offers);
@@ -76,7 +79,13 @@ angular.module('praxismarket', ['ngMaterial'])
             }
         }, true);
 
-        var offers = [
+        $scope.loadMoreOffers = function() {
+            var currentCardCount = $window.document.getElementsByClassName("card").length;
+            var moreOffers = communicator.getMoreOffersByType($scope.selectedType, currentCardCount);
+            dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
+        }
+
+        var offers =  [
             {
                 'company': 'Pharmakon Software GmbH',
                 'title': 'Werkstudent (m/w) - Kampagnen-Management / KA-DG141105',
@@ -156,9 +165,5 @@ angular.module('praxismarket', ['ngMaterial'])
         $mdThemingProvider.theme('default')
             .primaryPalette('indigo')
             .accentPalette('orange');
-    })
-    .run(function ($http) {
-        $http.defaults.headers.common.Authorization = "Basic cmFiZTEwMTI6RnJpZWRyaWNoOTI=";
-        $http.defaults.headers.common.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
     });
 ;

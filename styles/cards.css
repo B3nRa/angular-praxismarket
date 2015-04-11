@@ -1,14 +1,17 @@
 .card-container {
     position: relative;
+    padding: 2rem;
 }
 
 .card {
     min-height: 150px;
-    width: 50rem;
-    margin: 2rem auto;
+    max-width: 85rem;
+    min-width: 40rem;
+    margin: 2.5rem auto;
 }
 
-.card-header {
+
+    .card-header {
     margin-bottom: 0.5rem;
     position: relative;
     font-size: 20px;
@@ -69,7 +72,7 @@ path:hover {
     text-overflow: ellipsis;
     overflow: hidden;
     color: #3F51B5;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .card-body-text {

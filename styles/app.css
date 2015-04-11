@@ -12,6 +12,11 @@ html, body {
     font-weight: 300;
     margin: 0;
     padding: 0;
+
+}
+
+md-content.md-default-theme {
+    background-color: #E5E5E5;
 }
 
 .toolbardemoBasicUsage md-toolbar md-icon.md-default-theme {
@@ -39,10 +44,12 @@ html, body {
 	color: white;
 	font-weight: 100;
 	margin-top: 20px;
+    outline: none;
 }
 .search-input:focus {
 	background-color: white;
-	color: black;
+	color: #666;
+    outline: none;
 }
 .search-input::-webkit-input-placeholder {
 	color:   white;
@@ -75,7 +82,7 @@ html, body {
 	left: 8px;
 }
 .focus {
-	color: black !important;
+	color: #666 !important;
 }
 
 .nav-icon {
