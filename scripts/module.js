@@ -1,4 +1,18 @@
 angular.module('praxismarket', ['ngMaterial'])
+    .factory('dataService', function () {
+        var streamData = {};
+        return {
+            getStreamData: function() {
+                return streamData;
+            },
+            setStreamData: function(newStreamData) {
+                streamData = newStreamData;
+            },
+            resetStreamData: function() {
+                streamData = {};
+            }
+        };
+    })
     .controller('MainController', function ($scope) {
         $scope.appName = "Praxis Market";
     })
@@ -18,16 +32,38 @@ angular.module('praxismarket', ['ngMaterial'])
             angular.element(document.getElementById('search-icon')).removeClass("focus");
         }
     })
-    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+    .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log, dataService, $mdMedia) {
         $scope.close = function () {
             $mdSidenav('left').close()
                 .then(function () {
                     $log.debug("close LEFT is done");
                 });
         };
+        $scope.typeSelected = function(offer) {
+            console.log("selected: " + offer.shortname);
+            if($mdMedia('gt-md')) {
+                // request for desktop
+                var offers = communicator.getOffersByType(offer.shortname);
+            } else {
+                // request on mobile
+                var offers = communicator.getOffersByType(offer.shortname, 10);
+            }
+
+            dataService.setStreamData(offers);
+        };
+
+        $scope.offerTypes = communicator.getAllOfferTypes();
     })
-    .controller('cardController', function ($scope, $mdDialog) {
-        $scope.joboffers = [
+    .controller('cardController', function ($scope, $mdDialog, dataService) {
+        $scope.$watch(function(scope) {
+            return dataService.getStreamData();
+        }, function(newVal, oldVal, scope) {
+            if(newVal !== oldVal) {
+                scope.joboffers = newVal;
+            }
+        }, true);
+
+        var offers =  [
             {
                 'company': 'Pharmakon Software GmbH',
                 'title': 'Werkstudent (m/w) - Kampagnen-Management / KA-DG141105',
@@ -45,6 +81,8 @@ angular.module('praxismarket', ['ngMaterial'])
                 'lastname': 'Göpferich'
             }
         ];
+        $scope.joboffers = offers;
+        dataService.setStreamData(offers);
 
         $scope.showCompanyDetails = function (ev, companyId) {
             var companies = [{

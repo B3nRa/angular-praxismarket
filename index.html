@@ -6,6 +6,8 @@
 
     <meta charset="UTF-8">
 
+    <script src="scripts/communicator.js"></script>
+
 	<!-- Angulars Material CSS now available via Google CDN; version 0.8 used here -->
 	<link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
 
@@ -32,33 +34,12 @@
                 <h1 class="md-toolbar-tools">{{ appName }}</h1>
             </md-toolbar>
             <md-content layout-padding ng-controller="LeftCtrl">
-                <md-list>
-                    <md-list-item class="md-2-line">
-                        <i class="fa fa-book nav-icon"></i>
+                <md-list ng-repeat="offer in offerTypes">
+                    <md-list-item class="md-2-line" ng-click="typeSelected(offer)">
+                        <i class="fa {{ offer.icon }} nav-icon"></i>
                         <div class="md-list-item-text">
-                            <h3>Foo List Item 1</h3>
-                            <p>asdasdasd</p>
-                        </div>
-                    </md-list-item>
-                    <md-list-item class="md-2-line">
-                        <i class="fa fa-book nav-icon"></i>
-                        <div class="md-list-item-text">
-                            <h3>Foo List Item 2</h3>
-                            <p>asdasdasd</p>
-                        </div>
-                    </md-list-item>
-                    <md-list-item class="md-2-line">
-                        <i class="fa fa-book nav-icon"></i>
-                        <div class="md-list-item-text">
-                            <h3>Foo List Item 3</h3>
-                            <p>asdasdasd</p>
-                        </div>
-                    </md-list-item>
-                    <md-list-item class="md-2-line">
-                        <i class="fa fa-book nav-icon"></i>
-                        <div class="md-list-item-text">
-                            <h3>Foo List Item 4</h3>
-                            <p>asdasdasd</p>
+                            <h3>{{ offer.name }}</h3>
+                            <p>{{ offer.shortname }}</p>
                         </div>
                     </md-list-item>
                 </md-list>
