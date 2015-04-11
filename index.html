@@ -17,10 +17,13 @@
     <!-- Angular Material Javascript now available via Google CDN; version 0.8 used here -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
 
+    <script src="libs/ngDialog.js"></script>
     <!-- Add styles -->
     <link rel="stylesheet" type="text/css" href="styles/app.css">
     <link rel="stylesheet" type="text/css" href="styles/cards.css">
     <link rel="stylesheet" type="text/css" href="styles/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/ngDialog.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/ngDialog-theme-default.min.css">
 </head>
 <body ng-controller="MainController">
 <div ng-controller="AppCtrl" layout="column" style="height: 100%">
@@ -87,10 +90,10 @@
                                 <div class="card-header">
                                     <div class="card-header-avatar">
                                         <img src="https://plus.google.com/_/favicon?domain=facebook.com"  class="material-avatar"> </div>
-                                        <div class="card-header-info">
-                                            <span  class="card-header-title">{{::j.company}}</span>
-                                            <span id="card-location" class="card-header-title">{{::j.location}}</span>
-                                        </div>
+                                    <div class="card-header-info">
+                                        <span  class="card-header-title">{{::j.company}}</span>
+                                        <span id="card-location" class="card-header-title">{{::j.location}}</span>
+                                    </div>
 
                                     <!--<div class="card-header-info">-->
                                     <!--<div>Location</div>-->
@@ -149,6 +152,22 @@
 
     <!-- Include all your script files here -->
     <script src="scripts/module.js"></script>
-
+    <script type="text/ng-template" id="firstDialogId">
+        <div class="ngdialog-message">
+            <h3>ngDialog template</h3>
+            <p ng-show="theme">Test content for <code>{{theme}}</code></p>
+            <p ng-show="ngDialogData.foo">Data passed through: <code>{{ngDialogData.foo}}</code></p>
+            <p ng-show="dialogModel.message">Scope passed through: <code>{{dialogModel.message}}</code></p>
+        </div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="ngdialog-button ngdialog-button-secondary"
+                    ng-dialog="secondDialogId"
+                    ng-dialog-class="ngdialog-theme-default"
+                    ng-dialog-controller="SecondModalCtrl"
+                    ng-dialog-close-previous>Close and open</button>
+            <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next</button>
+        </div>
+    </script>
+</div>
 </body>
 </html>

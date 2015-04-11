@@ -18,7 +18,7 @@
                 });
         };
     }).
-    controller('cardController', function ($scope) {
+    controller('cardController', function ($scope, $mdDialog) {
         $scope.joboffers = [
             {
                 'company': 'Pharmakon Software GmbH',
@@ -30,4 +30,63 @@
             },
             {'company': 'PROCAD GmbH & Co. KG', 'title': 'Bachelor- oder Master- Abschlussarbeit - Evaluation von Systemen zur Speicherung und Realtime-Analyse großer Datenmengen', 'location': 'Berlin','description': 'Du bist kommunikativ und arbeitest gerne mit Menschen, dich stören schlechte Newsletter, wie sie heute leider üblich sind, du trägst lieber Verantwortung als dich im Konzern zu verstecken? Dann ist dieses Praktikum genau richtig für dich. Was Dich erwartet. # Ein ehrgeiziges, begeistertes Team # Ein innovatives Produkt "on the edge of technology" # Du lernst vom ersten Tag, wie man Marketing und Vertrieb in einem jungen IT-Unternehmen aufbaut # Du betreust eigenständig Projekte und setzt eigene Ideen um # Du übernimmst Verantwortung und arbeitest selbständig, wofür dir ein moderner ärbeitsplatz zur Verfügung steht Was Du mitbringen solltest # Lust in einem au strebenden Startup zu arbeiten # Freude an der Kommunkation mit Menschen # Laufendes Studium an einer Hochschule oder Universität # Begeisterung und selbständiges arbeiten Weitere Details siehe PDF-Ausschreibung.', 'firstname': 'Lisa', 'lastname': 'Göpferich'}
         ];
+
+        $scope.showCompanyDetails = function(ev, companyId){
+            var companies = [{ 'name': 'FOOBAR COMPANY',
+                'description': 'Lorem Ipsum',
+                'website': 'http://drop.social',
+                'street': 'Philippstr.',
+                'city': 'Karlsruhe',
+                'numberOfEmployees': '9',
+                'country': 'Germany'}];
+            var company = companies[companyId];
+            $scope.companyDetails = {
+                'name': company.name,
+                'description': company.description,
+                'website': company.website,
+                'street': company.street,
+                'city': company.city,
+                'numberOfEmployees': company.numberOfEmployees,
+                'country': company.country
+            }
+
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'companyDetails.template.html',
+                targetEvent: ev,
+                resolve: {company: function(){ return company;}}
+            })
+                .then(function(answer) {
+                    $scope.alert = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.alert = 'You cancelled the dialog.';
+                });
+        }
+
+        $scope.showAdvanced = function(ev) {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'companyDetails.template.html',
+                targetEvent: ev
+            })
+                .then(function(answer) {
+                    $scope.alert = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.alert = 'You cancelled the dialog.';
+                });
+        };
+
+        function DialogController($scope, $mdDialog, company) {
+            $scope.company = company;
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.answer = function(answer) {
+                $mdDialog.hide(answer);
+            };
+        }
     });
