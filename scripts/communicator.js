@@ -104,15 +104,19 @@
 
     global.communicator = {
         getAllOfferTypes: function (cb) {
+            //return [];
             return internal.getAllOfferTypes(cb);
         },
         getOffersByType: function (type, limit, cb) {
+            //return [];
             return internal.getAllOffersByType(type, limit, cb);
         },
         getMoreOffersByType: function (type, count) {
+            //return [];
             return internal.getMoreOffersByType(type, count);
         },
         getNotePad: function(cb) {
+            //return [];
             return internal.getNotePad(cb);
         }
     };

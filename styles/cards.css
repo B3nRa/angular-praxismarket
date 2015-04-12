@@ -119,7 +119,7 @@ path:hover {
 }
 
 .sticky-container {
-
+    background-color: white !important;
 }
 
 .dialog-company {
@@ -187,7 +187,14 @@ path:hover {
 /*}*/
 
 .dialog-container-company {
-    width: 30%;
+    width: 33%;
+    max-height: 90%;
+    height: 90%;
+}
+@media screen and (max-width: 960px) {
+    .dialog-container-company {
+        width: 80%;
+    }
 }
 
 
@@ -217,6 +224,12 @@ path:hover {
 
 .mailto-link {
     text-decoration: none;
+}
+
+.ngTruncateToggleText {
+    margin-left: 8px;
+    font-weight: bolder;
+    color: #3F51B5;
 }
 
 /*.dialogdemoBasicUsage .dialogDemo1 {*/
