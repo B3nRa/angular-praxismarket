@@ -188,6 +188,8 @@ path:hover {
 
 .dialog-container-company {
     width: 33%;
+    max-height: 90%;
+    height: 90%;
 }
 @media screen and (max-width: 960px) {
     .dialog-container-company {
