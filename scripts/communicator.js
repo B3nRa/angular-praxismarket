@@ -45,6 +45,8 @@
 
                 for (var i in jsonObj.offers) {
                     jsonObj.offers[i].company = jsonObj.companies[jsonObj.offers[i].companyId];
+                    jsonObj.offers[i].company.encodedAddress = encodeURIComponent(jsonObj.offers[i].company.street
+                    + " " + jsonObj.offers[i].company.zipCode + " " + jsonObj.offers[i].company.city);
                 }
 
                 cb(jsonObj.offers, jsonObj.companies);
@@ -85,7 +87,7 @@
             ];
             return moreOffers;
         },
-        getNotePad: function(cb) {
+        getNotePad: function (cb) {
             var url = internal.serviceUrl + "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/notepad/0/-1";
             var request = new XMLHttpRequest();
             request.open('GET', url, true);  // `false` makes the request synchronous
@@ -115,7 +117,7 @@
             //return [];
             return internal.getMoreOffersByType(type, count);
         },
-        getNotePad: function(cb) {
+        getNotePad: function (cb) {
             //return [];
             return internal.getNotePad(cb);
         }
