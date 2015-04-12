@@ -35,8 +35,10 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
 
         var offerCallback = function (offers, companies) {
             //dataService.setStreamData(offers);
-            if(offers.length < 10) {
+            if(offers.length !== 10) {
                 $scope.moreOffersAvailable = false;
+            } else {
+                $scope.moreOffersAvailable = true;
             }
 
             $scope.joboffers = offers;
@@ -49,6 +51,8 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
             //dataService.setStreamData(offers);
             if(offers.length < 10) {
                 $scope.moreOffersAvailable = false;
+            } else {
+                $scope.moreOffersAvailable = true;
             }
 
             $scope.joboffers = $scope.joboffers.concat(offers);
@@ -123,26 +127,20 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
         // ==============================
         // ===== Cards
         // ==============================
-        //$scope.$watch(function (scope) {
-        //    return dataService.getStreamData();
-        //}, function (newVal, oldVal, scope) {
-        //    if (newVal !== oldVal) {
-        //        scope.joboffers = newVal;
-        //    }
-        //}, true);
-
         $scope.loadMoreOffers = function () {
             var currentCardCount = $window.document.getElementsByClassName("card").length;
             var moreOffers = communicator.getMoreOffersByType($scope.selectedType, currentCardCount, pagingCallback);
             //dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
         }
 
-        var offers = [];
+        //var offers = [];
+        var limit = undefined;
+        if (!$mdMedia('gt-md')) {
+            limit = 10;
+        }
+        communicator.getOffersByType('thesis', limit, offerCallback);
 
-        communicator.getOffersByType('thesis', undefined, offerCallback);
-        $scope.moreOffersAvailable = false;
-
-        $scope.joboffers = offers;
+        //$scope.joboffers = offers;
         //dataService.setStreamData(offers);
 
         $scope.showCompanyDetails = function (ev, companyId) {
