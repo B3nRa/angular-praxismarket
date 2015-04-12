@@ -64,7 +64,10 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
                     $log.debug("close LEFT is done");
                 });
         };
+        var offers = [];
         $scope.typeSelected = function (offer) {
+            offers = [];
+            $scope.selectedTypeName = offer.name;
             $scope.selectedType = offer.shortname;
             console.log("selected: " + offer.shortname);
             if ($mdMedia('gt-md')) {
@@ -110,9 +113,11 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
             //dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
         }
 
-        var offers = [];
+
 
         communicator.getOffersByType('thesis', undefined, offerCallback);
+        $scope.selectedTypeName = 'Abschlussarbeit';
+        $scope.selectedType = 'thesis';
         $scope.moreOffersAvailable = false;
 
         $scope.joboffers = offers;
