@@ -101,22 +101,18 @@
             request.send(null);
         },
         removeOfferFromNotepad: function(offer) {
-            var url = internal.serviceUrl + "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/notepad/offer";
-            var postData = '{"id": ' + offer.id + '}';
-            console.log("data: " + postData);
+            var url = internal.serviceUrl + "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/notepad/offer"
+                + "&delete=" + offer.id;
             var request = new XMLHttpRequest();
-            request.open('POST', url, true);  // `false` makes the request synchronous
-            request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-            request.send(postData);
+            request.open('GET', url, true);  // `false` makes the request synchronous
+            request.send(null);
         },
         addOfferToNotepad: function(offer) {
-            var url = internal.serviceUrl + "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/notepad/offer";
-            var postData = '{"id": ' + offer.id + '}';
-            console.log("data: " + postData);
+            var url = internal.serviceUrl + "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/notepad/offer"
+                + "&post=" + offer.id;
             var request = new XMLHttpRequest();
-            request.open('DELETE', url, true);  // `false` makes the request synchronous
-            request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-            request.send(postData);
+            request.open('GET', url, true);  // `false` makes the request synchronous
+            request.send(null);
         }
     };
 
