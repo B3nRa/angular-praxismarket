@@ -93,6 +93,17 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
             communicator.getNotePad(offerCallback);
         };
 
+        $scope.toggleNote = function(offer) {
+            console.log("toggle note: " + offer.onNotepad);
+            if(offer.onNotepad === true) {
+                communicator.removeOfferFromNotepad(offer);
+                offer.onNotepad = false;
+            } else {
+                communicator.addOfferToNotepad(offer);
+                offer.onNotepad = true;
+            }
+        }
+
         // ==============================
         // ===== Cards
         // ==============================
