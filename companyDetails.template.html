@@ -15,7 +15,7 @@
                         </div>
                         <div class="dialog-company-header-info">
                             <span class="dialog-company-name">
-                                {{company.name}}
+                                {{::company.companyName}}
                             </span>
                             <span class="dialog-company-website">
                                 <a class="mailto-link" href="{{::company.website}}">{{::company.website}}</a>
@@ -55,11 +55,11 @@
                             {{::company.contact.secondName}}
                         </div>
                         <div>
-                            <span class="dialog-company-info-prefix">Phone:</span> {{::company.contact.phone}}
+                            <span class="dialog-company-info-prefix">Phone:</span> {{::company.contact.telephone}}
                         </div>
                         <div>
                             <span class="dialog-company-info-prefix">Mail:</span> <a class="mailto-link"
-                                                                                     href="mailto:{{::company.contact.mail}}">{{::company.contact.mail}}</a>
+                                                                                     href="mailto:{{::company.contact.email}}">{{::company.contact.email}}</a>
                         </div>
                     </div>
                 </div>

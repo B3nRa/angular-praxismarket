@@ -47,7 +47,7 @@
                     jsonObj.offers[i].company = jsonObj.companies[jsonObj.offers[i].companyId];
                 }
 
-                cb(jsonObj.offers);
+                cb(jsonObj.offers, jsonObj.companies);
             }
             request.send(null);
         },
