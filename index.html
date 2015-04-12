@@ -5,6 +5,10 @@
 
     <meta charset="UTF-8">
 
+    <!-- Readmore and JQuery -->
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://viralpatel.net/blogs/demo/jquery/jquery.shorten.1.0.js"></script>
+
     <script src="scripts/communicator.js"></script>
 
     <!-- Angulars Material CSS now available via Google CDN; version 0.8 used here -->
@@ -15,9 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
 
-    <!-- Readmore and JQuery -->
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="libs/ng-text-truncate.js"></script>
+
 
     <!-- Angular Material Javascript now available via Google CDN; version 0.8 used here -->
     <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
@@ -95,24 +97,30 @@
             <!--</div>-->
             
             <div class="card-container-wrapper">
-                <md-content style="background-color: #ECECEC;">
+                <md-content>
                     <div class="card-container">
                         <md-card class="card" ng-repeat="j in joboffers | filter:searchQuery">
                             <md-card-content>
                                 <div class="card-header">
-                                    <div ng-click="showCompanyDetails($event, j.company.id)" class="card-header-avatar">
-                                        <img src="https://plus.google.com/_/favicon?domain=www.facebook.com"
+                                    <div ng-click="showCompanyDetails($event, 0)" class="card-header-avatar">
+                                        <img src="https://plus.google.com/_/favicon?domain={{::j.company.website}}"
                                              class="material-avatar"></div>
                                     <div class="card-header-info">
                                         <span ng-click="showCompanyDetails($event, j.company.id)" class="card-header-title">{{::j.company.companyName}}</span>
                                         <span class="card-header-title card-location">{{::j.usageSite}}</span>
                                     </div>
-                                </div>
 
+                                    <!--<div class="card-header-info">-->
+                                    <!--<div>Location</div>-->
+                                    <!--<div>Valid date</div>-->
+                                    <!--</div>-->
+                                </div>
+                                <!--<hr>-->
                                 <div class="card-body">
                                     <div class="card-body-title">{{::j.shortDescription}}</div>
-                                    <p ng-text-truncate="j.description"
-                                       ng-tt-words-threshold="50" class="card-body-text"></p>
+                                    <article class="card-body-text">
+                                        {{::j.description}}
+                                    </article>
                                 </div>
                                 <div class="card-footer">
                                     <md-button class="md-icon-button" aria-label="Add to Note List"
@@ -120,8 +128,9 @@
                                         <md-icon class="card-icon-button"
                                                  md-svg-icon="img/icons/ic_bookmark_outline_48px.svg"/>
                                     </md-button>
+
                                 <span class="card-footer-contact">
-                                 <md-button class="card-flat-button" style="margin-right: 4px"> Contact</md-button>
+                                 <md-button  ng-href="mailto:{{::j.contact.email}}"  class="card-flat-button" style="margin-right: 4px"> Contact</md-button>
                                 </span>
                                 </div>
                             </md-card-content>
@@ -184,6 +193,7 @@
             </button>
         </div>
     </script>
+    <script type="text/javascript">$(document).ready(function(){$(".card-body-text").shorten({"showChars" : 380});});</script>
 </div>
 </body>
 </html>
