@@ -27,7 +27,7 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
             }
         };
     })
-    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog, $window) {
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog, $window, $log) {
         // ==============================
         // ===== General
         // ==============================
@@ -42,7 +42,18 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
             $scope.joboffers = offers;
             $scope.companies = companies;
             $scope.$apply();
-            $window.offers = offers;
+            angular.element(".card-body-text").shorten({"showChars": 440});
+        };
+
+        var pagingCallback = function (offers, companies) {
+            //dataService.setStreamData(offers);
+            if(offers.length < 10) {
+                $scope.moreOffersAvailable = false;
+            }
+
+            $scope.joboffers = $scope.joboffers.concat(offers);
+            angular.extend($scope.companies,companies);
+            $scope.$apply();
             angular.element(".card-body-text").shorten({"showChars": 440});
         }
         // ==============================
@@ -122,7 +133,7 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
 
         $scope.loadMoreOffers = function () {
             var currentCardCount = $window.document.getElementsByClassName("card").length;
-            var moreOffers = communicator.getMoreOffersByType($scope.selectedType, currentCardCount, cb);
+            var moreOffers = communicator.getMoreOffersByType($scope.selectedType, currentCardCount, pagingCallback);
             //dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
         }
 

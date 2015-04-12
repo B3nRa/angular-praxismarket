@@ -63,7 +63,8 @@
 
                 for (var i in jsonObj.offers) {
                     jsonObj.offers[i].company = jsonObj.companies[jsonObj.offers[i].companyId];
-                }
+                    jsonObj.offers[i].company.encodedAddress = encodeURIComponent(jsonObj.offers[i].company.street
+                    + " " + jsonObj.offers[i].company.zipCode + " " + jsonObj.offers[i].company.city);                }
 
                 cb(jsonObj.offers, jsonObj.companies);
             }
