@@ -35,6 +35,10 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
 
         var offerCallback = function (offers, companies) {
             //dataService.setStreamData(offers);
+            if(offers.length < 10) {
+                $scope.moreOffersAvailable = false;
+            }
+
             $scope.joboffers = offers;
             $scope.companies = companies;
             $scope.$apply();
@@ -118,7 +122,7 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
 
         $scope.loadMoreOffers = function () {
             var currentCardCount = $window.document.getElementsByClassName("card").length;
-            var moreOffers = communicator.getMoreOffersByType($scope.selectedType, currentCardCount);
+            var moreOffers = communicator.getMoreOffersByType($scope.selectedType, currentCardCount, cb);
             //dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
         }
 
