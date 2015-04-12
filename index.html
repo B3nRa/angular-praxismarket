@@ -102,18 +102,13 @@
                         <md-card class="card" ng-repeat="j in joboffers | filter:searchQuery">
                             <md-card-content>
                                 <div class="card-header">
-                                    <div ng-click="showCompanyDetails($event, 0)" class="card-header-avatar">
+                                    <div ng-click="showCompanyDetails($event, j.company.id)" class="card-header-avatar">
                                         <img src="https://plus.google.com/_/favicon?domain={{::j.company.website}}"
                                              class="material-avatar"></div>
                                     <div class="card-header-info">
                                         <span ng-click="showCompanyDetails($event, j.company.id)" class="card-header-title">{{::j.company.companyName}}</span>
                                         <span class="card-header-title card-location">{{::j.usageSite}}</span>
                                     </div>
-
-                                    <!--<div class="card-header-info">-->
-                                    <!--<div>Location</div>-->
-                                    <!--<div>Valid date</div>-->
-                                    <!--</div>-->
                                 </div>
                                 <!--<hr>-->
                                 <div class="card-body">
