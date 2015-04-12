@@ -94,6 +94,7 @@
 
                 for (var i in jsonObj.offers) {
                     jsonObj.offers[i].company = jsonObj.companies[jsonObj.offers[i].companyId];
+                    jsonObj.offers[i].onNotepad = true;
                 }
 
                 cb(jsonObj.offers);
