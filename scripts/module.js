@@ -1,18 +1,9 @@
-angular.module('praxismarket', ['ngMaterial'])
+angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
     .factory('dataService', function () {
         //var streamData = {};
         var dialog;
         var companies;
         return {
-            //getStreamData: function () {
-            //    return streamData;
-            //},
-            //setStreamData: function (newStreamData) {
-            //    streamData = newStreamData;
-            //},
-            //resetStreamData: function () {
-            //    streamData = {};
-            //},
             setCompanies: function (newCompanies) {
                 companies = newCompanies;
             },
@@ -27,18 +18,18 @@ angular.module('praxismarket', ['ngMaterial'])
             }
         };
     })
-    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog) {
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog, $window) {
         // ==============================
         // ===== General
         // ==============================
         $scope.appName = "Praxis Market";
 
         var offerCallback = function (offers, companies) {
-            //dataService.setStreamData(offers);
             $scope.joboffers = offers;
             $scope.companies = companies;
             $scope.$apply();
         }
+
         // ==============================
         // ===== Side Nav
         // ==============================
@@ -55,7 +46,7 @@ angular.module('praxismarket', ['ngMaterial'])
         $scope.blur = function () {
             console.log("unfocus");
             angular.element(document.getElementById('search-icon')).removeClass("focus");
-        }
+        };
 
         $scope.close = function () {
             $mdSidenav('left').close()
@@ -63,6 +54,7 @@ angular.module('praxismarket', ['ngMaterial'])
                     $log.debug("close LEFT is done");
                 });
         };
+
         $scope.typeSelected = function (offer) {
             $scope.selectedType = offer.shortname;
             console.log("selected: " + offer.shortname);
@@ -76,8 +68,6 @@ angular.module('praxismarket', ['ngMaterial'])
                 $scope.moreOffersAvailable = true;
                 $scope.close();
             }
-
-            //dataService.setStreamData(offers);
         };
 
         communicator.getAllOfferTypes(function (offers) {
@@ -88,27 +78,18 @@ angular.module('praxismarket', ['ngMaterial'])
         // ==============================
         // ===== Wish List
         // ==============================
-        
-        $scope.loadWishList = function() {
+        $scope.loadWishList = function () {
             communicator.getNotePad(offerCallback);
         };
 
         // ==============================
         // ===== Cards
         // ==============================
-        //$scope.$watch(function (scope) {
-        //    return dataService.getStreamData();
-        //}, function (newVal, oldVal, scope) {
-        //    if (newVal !== oldVal) {
-        //        scope.joboffers = newVal;
-        //    }
-        //}, true);
-
         $scope.loadMoreOffers = function () {
             var currentCardCount = $window.document.getElementsByClassName("card").length;
             var moreOffers = communicator.getMoreOffersByType($scope.selectedType, currentCardCount);
             //dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
-        }
+        };
 
         var offers = [
             {
@@ -129,26 +110,9 @@ angular.module('praxismarket', ['ngMaterial'])
             }
         ];
         $scope.joboffers = offers;
-        //dataService.setStreamData(offers);
 
         $scope.showCompanyDetails = function (ev, companyId) {
             ev.stopPropagation();
-            //var companies = [{
-            //    'name': 'FOOBAR COMPANY',
-            //    'description': 'Lorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-            //    'website': 'http://drop.social',
-            //    'street': 'Philippstr. 3',
-            //    'city': 'Karlsruhe',
-            //    'zipcode': '12345',
-            //    'numberOfEmployees': '9',
-            //    'country': 'Germany',
-            //    'contact': {
-            //        'firstName': 'Clark',
-            //        'secondName': 'Gable',
-            //        'phone': '+49 12345',
-            //        'mail': 'foo@bar.com'
-            //    }
-            //}];
             var company = $scope.companies[companyId];
             console.log(company);
 
@@ -169,7 +133,6 @@ angular.module('praxismarket', ['ngMaterial'])
                 });
         };
 
-
         function DialogController($scope, $mdDialog, dataService, company) {
             $scope.company = company;
             dataService.setDialog($mdDialog);
@@ -177,7 +140,7 @@ angular.module('praxismarket', ['ngMaterial'])
             $scope.stopPropagation = function (event) {
                 event.stopPropagation();
             }
-        }
+        };
 
         $scope.closeDialog = function () {
             var dialog = dataService.getDialog();
@@ -185,7 +148,7 @@ angular.module('praxismarket', ['ngMaterial'])
                 dataService.setDialog(undefined);
                 dialog.hide();
             }
-        }
+        };
     })
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')

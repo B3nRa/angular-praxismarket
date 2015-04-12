@@ -3,7 +3,7 @@
         <md-content class="sticky-container">
             <!--<md-subheader class="md-sticky-no-effect">{{company.name}}</md-subheader>-->
             <div class="dialog-content">
-                <a href="http://maps.google.com/?q=PhilippstraÃŸe 9 Karlsruhe">
+                <a href="http://maps.google.com/?q=Philippstraße 9 Karlsruhe">
                     <img class="dialog-company-map"
                          src="https://maps.googleapis.com/maps/api/staticmap?size=454x160&markers=color:blue%7CPhilippstra%C3%9Fe%209%20Karlsruhe"></a>
 
@@ -54,7 +54,7 @@
                             <span class="dialog-company-info-prefix">Contact:</span> {{::company.contact.firstName}}
                             {{::company.contact.secondName}}
                         </div>
-                        <div>
+                        <div ng-show="company.contact.telephone">
                             <span class="dialog-company-info-prefix">Phone:</span> {{::company.contact.telephone}}
                         </div>
                         <div>

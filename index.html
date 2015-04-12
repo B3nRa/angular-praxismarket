@@ -17,7 +17,7 @@
 
     <!-- Readmore and JQuery -->
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="/libs/readmore.min.js"></script>
+    <script src="libs/ng-text-truncate.js"></script>
 
     <!-- Angular Material Javascript now available via Google CDN; version 0.8 used here -->
     <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
@@ -100,25 +100,19 @@
                         <md-card class="card" ng-repeat="j in joboffers | filter:searchQuery">
                             <md-card-content>
                                 <div class="card-header">
-                                    <div ng-click="showCompanyDetails($event, 0)" class="card-header-avatar">
+                                    <div ng-click="showCompanyDetails($event, j.company.id)" class="card-header-avatar">
                                         <img src="https://plus.google.com/_/favicon?domain=www.facebook.com"
                                              class="material-avatar"></div>
                                     <div class="card-header-info">
                                         <span ng-click="showCompanyDetails($event, j.company.id)" class="card-header-title">{{::j.company.companyName}}</span>
                                         <span class="card-header-title card-location">{{::j.usageSite}}</span>
                                     </div>
-
-                                    <!--<div class="card-header-info">-->
-                                    <!--<div>Location</div>-->
-                                    <!--<div>Valid date</div>-->
-                                    <!--</div>-->
                                 </div>
-                                <!--<hr>-->
+
                                 <div class="card-body">
                                     <div class="card-body-title">{{::j.shortDescription}}</div>
-                                    <article class="card-body-text">
-                                        {{::j.description}}
-                                    </article>
+                                    <p ng-text-truncate="j.description"
+                                       ng-tt-words-threshold="50" class="card-body-text"></p>
                                 </div>
                                 <div class="card-footer">
                                     <md-button class="md-icon-button" aria-label="Add to Note List"
@@ -189,23 +183,6 @@
             <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next
             </button>
         </div>
-    </script>
-    <script>
-        $('.card-body-text').each(function() {
-            if($(this).innerHeight() > 150){
-                $(this).readmore({
-                    moreLink: '<a href="#" class="read-more-link">Show more text ></a>',
-                    lessLink: '<a href="#" class="read-less-link">&lt; Show less text</a>',
-                    maxHeight: 228,
-                    speed: 200,
-                    afterToggle: function(trigger, element, expanded) {
-                        if(! expanded) { // The "Close" link was clicked
-                            $('html, body').animate( { scrollTop: element.offset().top }, {duration: 100 } );
-                        }
-                    }
-                });
-            }
-        });
     </script>
 </div>
 </body>

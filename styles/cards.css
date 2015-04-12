@@ -118,7 +118,7 @@ path:hover {
 }
 
 .sticky-container {
-
+    background-color: white !important;
 }
 
 .dialog-company {
@@ -186,7 +186,7 @@ path:hover {
 /*}*/
 
 .dialog-container-company {
-    width: 30%;
+    width: 33%;
 }
 
 .dialog-company-map {
@@ -196,6 +196,12 @@ path:hover {
 
 .mailto-link {
     text-decoration: none;
+}
+
+.ngTruncateToggleText {
+    margin-left: 8px;
+    font-weight: bolder;
+    color: #3F51B5;
 }
 
 /*.dialogdemoBasicUsage .dialogDemo1 {*/
