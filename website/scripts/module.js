@@ -119,7 +119,9 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
         $scope.toggleNote = function(offer) {
             console.log("toggle note: " + offer.onNotepad);
             if(offer.onNotepad === true) {
-                communicator.removeOfferFromNotepad(offer);
+                communicator.removeOfferFromNotepad(offer, function() {
+                    communicator.getNotePad(offerCallback)
+                });
                 offer.onNotepad = false;
             } else {
                 communicator.addOfferToNotepad(offer);
@@ -137,7 +139,7 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
         }
 
 
-    //var offers = [];
+        //var offers = [];
         var limit = undefined;
         if (!$mdMedia('gt-md')) {
             limit = 10;
