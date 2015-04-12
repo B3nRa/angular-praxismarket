@@ -30,6 +30,7 @@ angular.module('praxismarket', ['ngMaterial'])
             //dataService.setStreamData(offers);
             $scope.joboffers = offers;
             $scope.$apply();
+            angular.element(".card-body-text").shorten({"showChars" : 440});
         }
         // ==============================
         // ===== Side Nav
