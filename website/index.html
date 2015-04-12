@@ -8,8 +8,6 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="http://viralpatel.net/blogs/demo/jquery/jquery.shorten.1.0.js"></script>
 
-    <script src="scripts/communicator.js"></script>
-
     <!-- Angulars Material CSS now available via Google CDN; version 0.8 used here -->
     <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
 
@@ -21,40 +19,41 @@
     <!-- Angular Material Javascript now available via Google CDN; version 0.8 used here -->
     <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
     <script src="libs/ng-text-truncate.js"></script>
+    <script src="/libs/pace.min.js"></script>
 
-	<!-- Add styles -->
+    <!-- Add styles -->
     <link rel="stylesheet" type="text/css" href="styles/cards.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="styles/app.css">
 
 </head>
 <body ng-controller="MainController" layout="row" ng-click="closeDialog()">
-    <!--<section layout="row" flex>-->
-        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
-                    md-is-locked-open="$mdMedia('gt-md')">
-            <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">{{ appName }}</h1>
-            </md-toolbar>
-            <md-content layout-padding>
-                <md-list ng-repeat="offer in offerTypes">
-                    <md-list-item class="md-2-line" ng-click="typeSelected(offer)">
-                        <i class="fa {{ offer.icon }} nav-icon"></i>
+<!--<section layout="row" flex>-->
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
+            md-is-locked-open="$mdMedia('gt-md')">
+    <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">{{ appName }}</h1>
+    </md-toolbar>
+    <md-content layout-padding>
+        <md-list ng-repeat="offer in offerTypes">
+            <md-list-item class="md-2-line" ng-click="typeSelected(offer)">
+                <i class="fa {{ offer.icon }} nav-icon"></i>
 
-                        <div class="md-list-item-text">
-                            <h3>{{ offer.name }}</h3>
+                <div class="md-list-item-text">
+                    <h3>{{ offer.name }}</h3>
 
-                            <p>{{ offer.shortname }}</p>
-                        </div>
-                    </md-list-item>
-                </md-list>
-            </md-content>
-        </md-sidenav>
+                    <p>{{ offer.shortname }}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</md-sidenav>
 
-        <!--<div layout="column" style="height: 100%">-->
-        <div layout="column" flex role="main" tabindex="-1">
+<!--<div layout="column" style="height: 100%">-->
+<div layout="column" flex role="main" tabindex="-1">
 
-        <md-toolbar class="toolbar">
-            <div class="md-toolbar-tools">
+    <md-toolbar class="toolbar">
+        <div class="md-toolbar-tools">
             <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()" hide-gt-md>
                 <i class="fa fa-bars menu-icon"></i>
             </md-button>
@@ -72,69 +71,73 @@
             <md-button class="md-icon-button" aria-label="Wish List">
                 <i class="fa fa-clipboard list-icon" ng-click="loadWishList()"></i>
             </md-button>
-            </div>
-        </md-toolbar>
+        </div>
+    </md-toolbar>
 
 
-        <md-content ng-view flex layout-padding class="main-content">
+    <md-content ng-view flex layout-padding class="main-content">
 
-            <!--<div layout="column" layout-fill layout-align="top center">-->
-            <!--<p>-->
-            <!--The left sidenav will 'lock open' on a medium (>=960px wide) device.-->
-            <!--</p>-->
+        <!--<div layout="column" layout-fill layout-align="top center">-->
+        <!--<p>-->
+        <!--The left sidenav will 'lock open' on a medium (>=960px wide) device.-->
+        <!--</p>-->
 
-            <!--<p>-->
-            <!--The right sidenav will focus on a specific child element.-->
-            <!--</p>-->
+        <!--<p>-->
+        <!--The right sidenav will focus on a specific child element.-->
+        <!--</p>-->
 
-            <!--<div>-->
-            <!--<md-button ng-click="toggleLeft()"-->
-            <!--class="md-primary" hide-gt-md>-->
-            <!--Toggle left-->
-            <!--</md-button>-->
-            <!--</div>-->
-            <!--</div>-->
-            
-            <div class="card-container-wrapper">
-                <md-content>
-                    <div class="card-container">
-                        <md-card class="card" ng-repeat="j in joboffers | filter:searchQuery">
-                            <md-card-content>
-                                <div class="card-header">
-                                    <div ng-click="showCompanyDetails($event, j.company.id)" class="card-header-avatar">
-                                        <img src="https://plus.google.com/_/favicon?domain={{::j.company.website}}"
-                                             class="material-avatar"></div>
-                                    <div class="card-header-info">
-                                        <span ng-click="showCompanyDetails($event, j.company.id)" class="card-header-title">{{::j.company.companyName}}</span>
-                                        <span class="card-header-title card-location">{{::j.usageSite}}</span>
-                                    </div>
+        <!--<div>-->
+        <!--<md-button ng-click="toggleLeft()"-->
+        <!--class="md-primary" hide-gt-md>-->
+        <!--Toggle left-->
+        <!--</md-button>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <div class="card-container-wrapper">
+            <md-content>
+                <div class="card-container">
+                    <md-card class="card" ng-repeat="j in joboffers | filter:searchQuery">
+                        <md-card-content>
+                            <div class="card-header">
+                                <div ng-click="showCompanyDetails($event, j.company.id)" class="card-header-avatar">
+                                    <img src="https://plus.google.com/_/favicon?domain={{::j.company.website}}"
+                                         class="material-avatar"></div>
+                                <div class="card-header-info">
+                                    <span ng-click="showCompanyDetails($event, j.company.id)" class="card-header-title">{{::j.company.companyName}}</span>
+                                    <span class="card-header-title card-location">{{::j.usageSite}}</span>
                                 </div>
-                                <!--<hr>-->
-                                <div class="card-body">
-                                    <div class="card-body-title">{{::j.shortDescription}}</div>
-                                    <article class="card-body-text">
-                                        {{::j.description}}
-                                    </article>
-                                </div>
-                                <div class="card-footer">
-                                    <md-button class="md-icon-button" aria-label="Add to Note List"
-                                               style="width: 32px; height: 32px;">
-                                        <i class="fa fa-bookmark note-icon note-on-list" ng-click="toggleNote(j)" ng-show="j.onNotepad"></i>
-                                        <i class="fa fa-bookmark-o note-icon" ng-click="toggleNote(j)" ng-hide="j.onNotepad"></i>
-                                    </md-button>
+                            </div>
+                            <!--<hr>-->
+                            <div class="card-body">
+                                <div class="card-body-title">{{::j.shortDescription}}</div>
+                                <article class="card-body-text">
+                                    {{::j.description}}
+                                </article>
+                            </div>
+                            <div class="card-footer">
+                                <md-button class="md-icon-button" aria-label="Add to Note List"
+                                           style="width: 32px; height: 32px;">
+                                    <i class="fa fa-bookmark note-icon note-on-list" ng-click="toggleNote(j)"
+                                       ng-show="j.onNotepad"></i>
+                                    <i class="fa fa-bookmark-o note-icon" ng-click="toggleNote(j)"
+                                       ng-hide="j.onNotepad"></i>
+                                </md-button>
 
                                 <span class="card-footer-contact">
-                                 <md-button  ng-href="mailto:{{::j.contact.email}}"  class="card-flat-button" style="margin-right: 4px"> Contact</md-button>
+                                 <md-button ng-href="mailto:{{::j.contact.email}}" class="card-flat-button"
+                                            style="margin-right: 4px"> Contact
+                                 </md-button>
                                 </span>
-                                </div>
-                            </md-card-content>
-                        </md-card>
-                    </div>
-                    <md-button class="more-button" ng-show="moreOffersAvailable" ng-click="loadMoreOffers()">More...
-                    </md-button>
-                </md-content>
-            </div>
-        </md-content>
+                            </div>
+                        </md-card-content>
+                    </md-card>
+                </div>
+                <md-button class="more-button" ng-show="moreOffersAvailable" ng-click="loadMoreOffers()">More...
+                </md-button>
+            </md-content>
+        </div>
+    </md-content>
     <!--</section>-->
 
     <!-- AngularJS itself -->
@@ -166,6 +169,8 @@
 
     <!-- Include all your script files here -->
     <script src="scripts/module.js"></script>
+    <script src="scripts/communicator.js"></script>
+
     <script type="text/ng-template" id="firstDialogId">
         <div class="ngdialog-message">
             <h3>ngDialog template</h3>
@@ -187,7 +192,9 @@
             </button>
         </div>
     </script>
-    <script type="text/javascript">$(document).ready(function(){$(".card-body-text").shorten({"showChars" : 380});});</script>
+    <script type="text/javascript">$(document).ready(function () {
+        $(".card-body-text").shorten({"showChars": 380});
+    });</script>
 </div>
 </body>
 </html>
