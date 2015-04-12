@@ -96,10 +96,25 @@
 
                 for (var i in jsonObj.offers) {
                     jsonObj.offers[i].company = jsonObj.companies[jsonObj.offers[i].companyId];
+                    jsonObj.offers[i].onNotepad = true;
                 }
 
                 cb(jsonObj.offers);
             }
+            request.send(null);
+        },
+        removeOfferFromNotepad: function(offer) {
+            var url = internal.serviceUrl + "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/notepad/offer"
+                + "&delete=" + offer.id;
+            var request = new XMLHttpRequest();
+            request.open('GET', url, true);  // `false` makes the request synchronous
+            request.send(null);
+        },
+        addOfferToNotepad: function(offer) {
+            var url = internal.serviceUrl + "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/joboffer/notepad/offer"
+                + "&post=" + offer.id;
+            var request = new XMLHttpRequest();
+            request.open('GET', url, true);  // `false` makes the request synchronous
             request.send(null);
         }
     };
@@ -120,6 +135,12 @@
         getNotePad: function (cb) {
             //return [];
             return internal.getNotePad(cb);
+        },
+        removeOfferFromNotepad: function(offer) {
+            internal.removeOfferFromNotepad(offer);
+        },
+        addOfferToNotepad: function(offer) {
+            internal.addOfferToNotepad(offer);
         }
     };
 }(window));

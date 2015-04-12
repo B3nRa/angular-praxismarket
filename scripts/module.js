@@ -27,7 +27,7 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
             }
         };
     })
-    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog) {
+    .controller('MainController', function ($scope, dataService, $mdSidenav, $mdMedia, $mdDialog, $window) {
         // ==============================
         // ===== General
         // ==============================
@@ -38,6 +38,7 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
             $scope.joboffers = offers;
             $scope.companies = companies;
             $scope.$apply();
+            $window.offers = offers;
             angular.element(".card-body-text").shorten({"showChars": 440});
         }
         // ==============================
@@ -92,6 +93,17 @@ angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
         $scope.loadWishList = function () {
             communicator.getNotePad(offerCallback);
         };
+
+        $scope.toggleNote = function(offer) {
+            console.log("toggle note: " + offer.onNotepad);
+            if(offer.onNotepad === true) {
+                communicator.removeOfferFromNotepad(offer);
+                offer.onNotepad = false;
+            } else {
+                communicator.addOfferToNotepad(offer);
+                offer.onNotepad = true;
+            }
+        }
 
         // ==============================
         // ===== Cards

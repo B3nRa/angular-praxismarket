@@ -238,6 +238,13 @@ path:hover {
     color: #3F51B5;
 }
 
+.note-icon {
+    font-size: 18px !important;
+}
+.note-on-list {
+    color: #FF9800;
+}
+
 /*.dialogdemoBasicUsage .dialogDemo1 {*/
 /*height: 500px; }*/
 /*.dialogdemoBasicUsage .full {*/
