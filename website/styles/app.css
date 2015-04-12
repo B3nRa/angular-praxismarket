@@ -121,12 +121,12 @@ md-content.md-default-theme {
     display: none;
 }
 
-/*.pace .pace-progress {*/
-    /*background: #fea737;*/
-    /*position: fixed;*/
-    /*z-index: 2000;*/
-    /*top: 0;*/
-    /*right: 100%;*/
-    /*width: 100%;*/
-    /*height: 2px;*/
-/*}*/
+.pace .pace-progress {
+    background: #fea737;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 100%;
+    width: 100%;
+    height: 2px;
+}
