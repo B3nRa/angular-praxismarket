@@ -63,11 +63,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="dialog-company-description">
-                    {{::company.description}}
-                </div>
+                <p ng-text-truncate="company.description"
+                ng-tt-chars-threshold="440" class="dialog-company-description"></p>
             </div>
-</div>
-</md-content>
-</md-dialog>
+        </md-content>
+    </md-dialog>
 </div>

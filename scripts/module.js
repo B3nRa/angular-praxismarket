@@ -1,4 +1,4 @@
-angular.module('praxismarket', ['ngMaterial'])
+angular.module('praxismarket', ['ngMaterial', 'ngTextTruncate'])
     .factory('dataService', function () {
         //var streamData = {};
         var dialog;
@@ -38,7 +38,7 @@ angular.module('praxismarket', ['ngMaterial'])
             $scope.joboffers = offers;
             $scope.companies = companies;
             $scope.$apply();
-            angular.element(".card-body-text").shorten({"showChars" : 440});
+            angular.element(".card-body-text").shorten({"showChars": 440});
         }
         // ==============================
         // ===== Side Nav
@@ -89,7 +89,7 @@ angular.module('praxismarket', ['ngMaterial'])
         // ==============================
         // ===== Wish List
         // ==============================
-        $scope.loadWishList = function() {
+        $scope.loadWishList = function () {
             communicator.getNotePad(offerCallback);
         };
 
@@ -110,8 +110,7 @@ angular.module('praxismarket', ['ngMaterial'])
             //dataService.setStreamData(dataService.getStreamData().concat(moreOffers));
         }
 
-        var offers = [
-        ];
+        var offers = [];
 
         communicator.getOffersByType('thesis', undefined, offerCallback);
         $scope.moreOffersAvailable = false;
@@ -164,7 +163,8 @@ angular.module('praxismarket', ['ngMaterial'])
 
             $scope.stopPropagation = function (event) {
                 event.stopPropagation();
-            }
+            };
+
         }
 
         $scope.closeDialog = function () {
@@ -180,4 +180,4 @@ angular.module('praxismarket', ['ngMaterial'])
             .primaryPalette('indigo')
             .accentPalette('orange');
     });
-;
+
