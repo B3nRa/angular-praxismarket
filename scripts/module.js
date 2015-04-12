@@ -2,6 +2,7 @@ angular.module('praxismarket', ['ngMaterial'])
     .factory('dataService', function () {
         //var streamData = {};
         var dialog;
+        var companies;
         return {
             //getStreamData: function () {
             //    return streamData;
@@ -12,6 +13,12 @@ angular.module('praxismarket', ['ngMaterial'])
             //resetStreamData: function () {
             //    streamData = {};
             //},
+            setCompanies: function (newCompanies) {
+                companies = newCompanies;
+            },
+            getCompanies: function () {
+                return companies;
+            },
             getDialog: function () {
                 return dialog;
             },
@@ -26,9 +33,10 @@ angular.module('praxismarket', ['ngMaterial'])
         // ==============================
         $scope.appName = "Praxis Market";
 
-        var offerCallback = function (offers) {
+        var offerCallback = function (offers, companies) {
             //dataService.setStreamData(offers);
             $scope.joboffers = offers;
+            $scope.companies = companies;
             $scope.$apply();
             angular.element(".card-body-text").shorten({"showChars" : 440});
         }
@@ -81,7 +89,7 @@ angular.module('praxismarket', ['ngMaterial'])
         // ==============================
         // ===== Wish List
         // ==============================
-        
+
 
         // ==============================
         // ===== Cards
@@ -123,23 +131,24 @@ angular.module('praxismarket', ['ngMaterial'])
 
         $scope.showCompanyDetails = function (ev, companyId) {
             ev.stopPropagation();
-            var companies = [{
-                'name': 'FOOBAR COMPANY',
-                'description': 'Lorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-                'website': 'http://drop.social',
-                'street': 'Philippstr. 3',
-                'city': 'Karlsruhe',
-                'zipcode': '12345',
-                'numberOfEmployees': '9',
-                'country': 'Germany',
-                'contact': {
-                    'firstName': 'Clark',
-                    'secondName': 'Gable',
-                    'phone': '+49 12345',
-                    'mail': 'foo@bar.com'
-                }
-            }];
-            var company = companies[companyId];
+            //var companies = [{
+            //    'name': 'FOOBAR COMPANY',
+            //    'description': 'Lorem Ipsum Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
+            //    'website': 'http://drop.social',
+            //    'street': 'Philippstr. 3',
+            //    'city': 'Karlsruhe',
+            //    'zipcode': '12345',
+            //    'numberOfEmployees': '9',
+            //    'country': 'Germany',
+            //    'contact': {
+            //        'firstName': 'Clark',
+            //        'secondName': 'Gable',
+            //        'phone': '+49 12345',
+            //        'mail': 'foo@bar.com'
+            //    }
+            //}];
+            var company = $scope.companies[companyId];
+            console.log(company);
 
             $mdDialog.show({
                 controller: DialogController,
