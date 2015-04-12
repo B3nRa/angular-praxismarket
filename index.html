@@ -62,6 +62,7 @@
 
             <h2 show-gt-md style="min-width: 175px; margin-left: 8px">
                 <span>{{ selectedTypeName }}</span>
+
             </h2>
             <!--<span style="width: 304px; max-width: 304px;" show-gt-md></span>-->
             <div class="input-container">
@@ -119,8 +120,8 @@
                                 <div class="card-footer">
                                     <md-button class="md-icon-button" aria-label="Add to Note List"
                                                style="width: 32px; height: 32px;">
-                                        <md-icon class="card-icon-button"
-                                                 md-svg-icon="img/icons/ic_bookmark_outline_48px.svg"/>
+                                        <i class="fa fa-bookmark note-icon note-on-list" ng-click="toggleNote(j)" ng-show="j.onNotepad"></i>
+                                        <i class="fa fa-bookmark-o note-icon" ng-click="toggleNote(j)" ng-hide="j.onNotepad"></i>
                                     </md-button>
 
                                 <span class="card-footer-contact">

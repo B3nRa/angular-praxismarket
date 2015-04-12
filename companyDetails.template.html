@@ -1,16 +1,16 @@
 <div class="dialog-container-company" ng-click="stopPropagation($event)">
-    <md-dialog aria-label="Company">
+    <md-dialog aria-label="Company" class="dialog-company-element">
         <md-content class="sticky-container">
             <!--<md-subheader class="md-sticky-no-effect">{{company.name}}</md-subheader>-->
             <div class="dialog-content">
-                <a href="http://maps.google.com/?q=Philippstraße 9 Karlsruhe">
+                <a href="http://maps.google.com/?q={{::company.street}} {{::company.zipcode}} {{::company.city}}">
                     <img class="dialog-company-map"
-                         src="https://maps.googleapis.com/maps/api/staticmap?size=454x160&markers=color:blue%7CPhilippstra%C3%9Fe%209%20Karlsruhe"></a>
-
+                         src="https://maps.googleapis.com/maps/api/staticmap?size=900x160&markers=color:blue%7C{{::company.encodedAddress}}">
+                </a>
                 <div class="dialog-company">
                     <div class="dialog-company-header">
                         <div class="dialog-company-name" class="dialog-company-header-avatar">
-                            <img src="https://plus.google.com/_/favicon?domain=www.facebook.com"
+                            <img src="https://plus.google.com/_/favicon?domain={{::company.website}}"
                                  class="material-avatar">
                         </div>
                         <div class="dialog-company-header-info">
@@ -45,7 +45,7 @@
                             </div>
                             <div>
                                 <span class="dialog-company-info-prefix">Offers No.:</span>
-                                {{::company.numberOfEmployees}}
+                                {{::company.numberOfOffers}}
                             </div>
                         </div>
                     </div>
